@@ -83,7 +83,7 @@ class adminController extends Controller
     }
 
     //deletefn
-    public function deleteRow()
+    public function deleteRow($model, $rowid)
     {
         $row = $model::where("id", $rowid)->first();
         if ($row == null) {
@@ -183,5 +183,82 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
 
 
 
+    }
+    /** Save company about **/
+
+    public function savecompanyabout (Request $req){
+        $aboutTitle = $req->about_title;
+        $aboutText = $req->about_text;
+
+        $saveArray = [
+            'aboutTitle'=>$aboutTitle,
+            'aboutText' =>$aboutText,
+
+            ];
+
+
+            $result = $this->savedata(Companydetail::class, null , $saveArray);
+    if ($result) {
+        # code...
+        return redirect()->route("pages")->with("success", "Update was succesful! About company updated");
+    } else {
+        # code...
+        return redirect()->route("pages")->with("error", "Failed to update try About company again!");
+    }
+
+
+    }
+    /**save faqs */
+    public function savecompanyfaq (Request $req){
+        $question = $req->question;
+        $answer = $req->answer;
+        $saveArray =[
+            "question" => $question,
+            "answer" =>$answer
+        ];
+
+        $result = $this->savedata(Faq::class, "new" , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("pages")->with("success", "Update was succesful! Faq created");
+        } else {
+            # code...
+            return redirect()->route("pages")->with("error", "Failed to create Faqs");
+        }
+    }
+
+    // delet faqs
+    public function deletecompanyfaq (Request $req){
+        $id = $req->id;
+        $result = $this->deleteRow(Faq::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("pages")->with("warning", "Faq deleted successfuly");
+        } else {
+            # code...
+            return redirect()->route("pages")->with("error", "Failed to delete Faqs");
+        }
+
+
+    }
+
+    //edit faqs
+    public function editcompanyfaq (Request $req){
+        $question = $req->question;
+        $answer = $req->answer;
+        $id = $req->id;
+        $saveArray =[
+            "question" => $question,
+            "answer" =>$answer
+        ];
+
+        $result = $this->savedata(Faq::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("pages")->with("success", "Update was succesful! Faq created");
+        } else {
+            # code...
+            return redirect()->route("pages")->with("error", "Failed to create Faqs");
+        }
     }
 }
