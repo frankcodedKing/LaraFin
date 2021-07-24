@@ -478,8 +478,7 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-
-
+            @include("flash-message")
             @yield('body')
 
 

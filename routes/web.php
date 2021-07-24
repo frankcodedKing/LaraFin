@@ -35,3 +35,17 @@ Route::get('/referrals', [App\Http\Controllers\adminController::class, 'userrefe
 Route::get('/withdrawalrequests', [App\Http\Controllers\adminController::class, 'withdrawalrequests'])->name('withdrawalrequests');
 Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 'runninginvestments'])->name('runninginvestments');
 Route::get('/viewuser', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
+
+
+//routes to preven error
+Route::get('/savecompanydetial', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanydetial');
+Route::get('/savecompanyabout', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyabout');
+Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyfaq');
+
+
+
+
+//admin post request
+Route::post('/savecompanydetails', [App\Http\Controllers\adminController::class, 'savecompanydetails'])->name('savecompanydetails');
+Route::post('/savecompanyabout', [App\Http\Controllers\adminController::class, 'savecompanyabout'])->name('savecompanyabout');
+Route::post('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'savecompanyfaq'])->name('savecompanyfaq');

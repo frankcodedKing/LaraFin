@@ -24,20 +24,24 @@ tinymce.init({
             <div style="margin-bottom: 15px">
                 <h1>BASIC SITE SETTINGS</h1>
             </div>
+            {{-- companyabout --}}
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">About company</div>
                         <div class="card-body">
 
-                            <form action="" method="post" novalidate="novalidate">
+                            <form action="{{ route("savecompanyabout") }}" method="post" novalidate="novalidate">
+                                @csrf
                                 <div class="form-group">
                                     <label for="cc-payment" class="control-label mb-1">About us Title</label>
-                                    <input id="about" name="about" type="text" class="form-control" aria-required="true" aria-invalid="false" value="Title here">
+                                    <input id="about" name="about_title" type="text" class="form-control" aria-required="true" aria-invalid="false" value="{{ isset($companyDetail) ? $companyDetail->aboutTitle: 'Enter site Title here'}}">
                                 </div>
                                 <div class="form-group has-success">
                                     <label for="cc-name" class="control-label mb-1">Write Company description Below</label>
-                                    <textarea id="default"  cols="15" rows="13"></textarea>
+                                    <textarea id="default"  cols="15" value="{{ isset($companyDetail) ? $companyDetail->aboutText: 'write brief description about the company'}}" rows="13" name="about_text">
+
+                                    </textarea>
 
                                     {{-- <textarea style="background-color: rgb(137, 204, 243)" name="" id="" cols="40" rows="30"></textarea> --}}
                                     <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
@@ -47,8 +51,8 @@ tinymce.init({
                                 <div>
                                     <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                         <i class="fa fa-pen fa-lg"></i>&nbsp;
-                                        <span id="payment-button-amount">Update About Us</span>
-                                        <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                       <span>Update About Us</span>
+
                                     </button>
                                 </div>
                             </form>
@@ -64,27 +68,29 @@ tinymce.init({
                             <small> Details</small>
                         </div>
                         <div class="card-body card-block">
+                            <form action="{{ route("savecompanydetails") }}" method="post">
+                                @csrf
                             <div class="form-group">
                                 <label for="company" class=" form-control-label">Company name</label>
-                                <input type="text" id="company" placeholder="Enter your company name" class="form-control">
+                                <input type="text" value="{{ isset($companyDetail) ? $companyDetail->companyName: 'Name of the company'}}" rows="13" id="company" placeholder="Enter your company name" name="companyname" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="company" class=" form-control-label">Running days</label>
-                                <input type="text" id="company" placeholder="Running days" class="form-control">
+                                <input type="text" value="{{ isset($companyDetail) ? $companyDetail->runningDays: 'Number of days'}}" id="company" placeholder="Running days" name="runningdays" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="vat" class=" form-control-label">Company Email</label>
-                                <input type="text" id="vat" placeholder="Company Email" class="form-control">
+                                <input type="text" id="vat" value="{{ isset($companyDetail) ? $companyDetail->companyEmail: 'Company email'}}" placeholder="Company Email" name="companyemail" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="street" class=" form-control-label">Company location</label>
-                                <input type="text" id="street" placeholder="Company location" class="form-control">
+                                <input type="text" id="street" value="{{ isset($companyDetail) ? $companyDetail->companyLocation: 'Company location'}}" placeholder="Company location" name="companylocation" class="form-control">
                             </div>
                             <div class="row form-group">
                                 <div class="col-8">
                                     <div class="form-group">
-                                        <label for="city" class=" form-control-label">Company Contact</label>
-                                        <input type="text" id="city" placeholder="Phone" class="form-control">
+                                        <label for="city" class=" form-control-label">Company phone</label>
+                                        <input type="text" id="city" value="{{ isset($companyDetail) ? $companyDetail->companyPhone: 'Company Phone'}}" placeholder="Phone" name="companycontact" class="form-control">
                                     </div>
                                 </div>
 
@@ -98,6 +104,7 @@ tinymce.init({
                                 </button>
                             </div>
                         </div>
+                    </form>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -106,21 +113,15 @@ tinymce.init({
                             <strong>ADD NEW FAQS</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                {{-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label class=" form-control-label">Static</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <p class="form-control-static">Username</p>
-                                    </div>
-                                </div> --}}
+                            <form action="{{ route("savecompanyfaq") }}" method="post" class="form-horizontal">
+                                @csrf
+
                                 <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label for="text-input" class=" form-control-label">Question</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="text-input" placeholder="EnterQuestion" class="form-control">
+                                        <input type="text" id="text-input" name="question" placeholder="EnterQuestion" class="form-control">
 
                                     </div>
                                 </div>
@@ -129,7 +130,7 @@ tinymce.init({
                                         <label for="email-input" class=" form-control-label">Answer</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="email" id="email-input" name="email-input" placeholder="Enter Answer" class="form-control">
+                                        <input type="email" id="email-input" name="answer" placeholder="Enter Answer" class="form-control">
 
                                     </div>
                                 </div>
@@ -165,9 +166,18 @@ tinymce.init({
                                 </div> --}}
 
                                 <div class="row">
-                                    <div class="col">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt beatae dolores odio harum<br>
-                                            tenetur esse hic placeat pariatur provident et atque, blanditiis at consequatur eaque! am.</p>
+                                    <div class="col-xs-12">
+                                        <h5>Question</h5>
+                                        <textarea name="question" id="" cols="20" rows="10">
+
+                                        </textarea>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <h5>Answer</h5>
+                                        <textarea name="answer" id="" cols="20" rows="10">
+
+                                        </textarea>
                                     </div>
 
                                 </div>
@@ -178,7 +188,7 @@ tinymce.init({
                             <button type="submit" class="btn btn-primary btn-sm">
                                 <i class="fa fa-dot-circle-o"></i> Edit
                             </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
+                            <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="fa fa-ban"></i> Delete
                             </button>
                         </div>
