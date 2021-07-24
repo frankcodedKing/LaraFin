@@ -49,3 +49,8 @@ Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pag
 Route::post('/savecompanydetails', [App\Http\Controllers\adminController::class, 'savecompanydetails'])->name('savecompanydetails');
 Route::post('/savecompanyabout', [App\Http\Controllers\adminController::class, 'savecompanyabout'])->name('savecompanyabout');
 Route::post('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'savecompanyfaq'])->name('savecompanyfaq');
+
+//faqs delete and edit
+Route::post('/delcompanyfaq', [App\Http\Controllers\adminController::class, 'deletecompanyfaq'])->name('deletcompanyfaq');
+Route::post('/editcompanyfaq', [App\Http\Controllers\adminController::class, 'editcompanyfaq'])->name('editcompanyfaq');
+

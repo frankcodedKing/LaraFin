@@ -39,8 +39,8 @@ tinymce.init({
                                 </div>
                                 <div class="form-group has-success">
                                     <label for="cc-name" class="control-label mb-1">Write Company description Below</label>
-                                    <textarea id="default"  cols="15" value="{{ isset($companyDetail) ? $companyDetail->aboutText: 'write brief description about the company'}}" rows="13" name="about_text">
-
+                                    <textarea id="default" name="about_text"  cols="15" value="" rows="13">
+                                        {{ isset($companyDetail) ? $companyDetail->aboutText: 'write brief description about the company'}}
                                     </textarea>
 
                                     {{-- <textarea style="background-color: rgb(137, 204, 243)" name="" id="" cols="40" rows="30"></textarea> --}}
@@ -112,8 +112,9 @@ tinymce.init({
                         <div class="card-header">
                             <strong>ADD NEW FAQS</strong>
                         </div>
+                        <form action="{{ route("savecompanyfaq") }}" method="post" class="form-horizontal">
                         <div class="card-body card-block">
-                            <form action="{{ route("savecompanyfaq") }}" method="post" class="form-horizontal">
+
                                 @csrf
 
                                 <div class="row form-group">
@@ -121,7 +122,7 @@ tinymce.init({
                                         <label for="text-input" class=" form-control-label">Question</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="text" id="text-input" name="question" placeholder="EnterQuestion" class="form-control">
+                                        <input type="text" id="text-input" name="question" placeholder="EnterQuestion" required class="form-control">
 
                                     </div>
                                 </div>
@@ -130,21 +131,20 @@ tinymce.init({
                                         <label for="email-input" class=" form-control-label">Answer</label>
                                     </div>
                                     <div class="col-12 col-md-9">
-                                        <input type="email" id="email-input" name="answer" placeholder="Enter Answer" class="form-control">
+                                        <input type="text" id="email-input" name="answer" placeholder="Enter Answer" required class="form-control">
 
                                     </div>
                                 </div>
 
-                            </form>
+
                         </div>
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Submit
+                                <i class="fa fa-dot-circle-o"></i> Create
                             </button>
-                            <button type="reset" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Reset
-                            </button>
+
                         </div>
+                    </form>
                     </div>
 
                 </div>
@@ -155,7 +155,7 @@ tinymce.init({
                             <strong>FAQ 1</strong>
                         </div>
                         <div class="card-body card-block">
-                            <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                            <form action="" method="post"  class="form-horizontal">
                                 {{-- <div class="row form-group">
                                     <div class="col col-md-3">
                                         <label class=" form-control-label">Static</label>
@@ -193,6 +193,7 @@ tinymce.init({
                             </button>
                         </div>
                     </div>
+
 
                 </div>
 
