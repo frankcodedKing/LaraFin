@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Companydetail;
 use App\Models\Faq;
-
+use App\Models\User;
+use App\Models\Deposit;
+use App\Models\Withdrawal;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -116,17 +118,24 @@ class adminController extends Controller
 
     public function users()
     {
-        return view("admin.users");
+        $users = User::paginate(15);
+        $data =["users"=> $users];
+        return view("admin.users", $data);
     }
 
     public function pendingdeposits()
     {
-        return view("admin.pendingdeposits");
+        $pendingDeposit = Deposit::where("status", 0)->paginate(20);
+        $data = ["pendingDeposit" => $pendingDeposit];
+        return view("admin.pendingdeposits",$data);
     }
 
     public function approveddeposits()
     {
-        return view("admin.approveddeposits");
+        $approvedDeposit = Deposit::where("status", 1)->paginate(20);
+        $data = ["approvedDeposit" => $approvedDeposit];
+
+        return view("admin.approveddeposits", $data);
     }
 
 
@@ -260,5 +269,51 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
             # code...
             return redirect()->route("pages")->with("error", "Failed to create Faqs");
         }
+    }
+
+
+    //user admin control
+    public function adminuserdelete (Request $req){
+        $id = $req->id;
+        $deuse= User::where("id", $id)->first();
+        if ($deuse->delete()) {
+            # code...
+            return redirect()->route("users")->with("warning","user deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("users")->with("error","deleting user failed");
+        }
+
+
+    }
+    public function adminunblock (Request $req){
+        $id = $req->id;
+        $deuse= User::where("id", $id)->first();
+        $deuse->blocked =0;
+        if ($deuse->save()) {
+            # code...
+            return redirect()->route("users")->with("success", "user unblocked successfuly");
+
+        } else {
+            # code...
+            return redirect()->route("users")->with("error", "failed to unblock user");
+        }
+
+
+    }
+    public function adminblock (Request $req){
+        $id = $req->id;
+        $deuse= User::where("id", $id)->first();
+        $deuse->blocked =1;
+        if ($deuse->save()) {
+            # code...
+            return redirect()->route("users")->with("success", "user blocked successfuly");
+
+        } else {
+            # code...
+            return redirect()->route("users")->with("error", "failed to block user");
+        }
+
+
     }
 }

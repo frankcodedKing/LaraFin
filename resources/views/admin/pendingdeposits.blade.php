@@ -69,23 +69,23 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($pendingDeposit)
+                            @foreach ( $pendingDeposit as $deposit )
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">1</span>
+                                        <span class="">$loop->index</span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
+                                <td>$deposit->name</td>
                                 <td>
-                                    <span class="desc">lori@example.com</span>
+                                    <span class="desc">$deposit->email</span>
                                 </td>
-
-                                <td>01234567890</td>
                                 <td>
-                                   <span class="desc">$67476</span>
+                                   <span class="desc">$deposit->amount</span>
                                 </td>
-                                <td>$679.00</td>
+                                <td>$deposit->method</td>
                                 <td>
                                     <div class="table-data-feature">
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="view">
@@ -104,6 +104,9 @@
                                 </td>
                             </tr>
                             <tr class="spacer"></tr>
+                            @endforeach
+
+                            @endif
                         </tbody>
                     </table>
                 </div>
