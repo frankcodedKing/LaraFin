@@ -77,7 +77,20 @@
                                     <a href="{{route('users')}}">All users</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('withdrawalrequests')}}">Withdrawal Requests</a>
+
+                                    <li class="active has-sub">
+                                        <a class="js-arrow" href="#">
+                                            <i class="fas fa-tachometer-alt"></i>Withdrawals</a>
+                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+
+                                            <li>
+                                                <a href="{{route('approvedwithdrawals')}}">Approved Withdrawals<span class="text-right" id="">(17)</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('pendingwithdrawals')}}">Pending-Withdrawals<span class="text-right" id="">(12)</span></a>
+
+                                        </ul>
+                                    </li>
                                 </li>
                                 <li>
 
@@ -126,10 +139,10 @@
                                 <i class="fas fa-copy"></i>Site setttings</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li>
-                                    <a href="login.html">Pages</a>
+                                    <a href="{{ route("pages") }}">Pages</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Register</a>
+                                    <a href="{{ route("viewfaqs") }}">Faqs</a>
                                 </li>
                                 <li>
                                     <a href="forget-pass.html">Forget Password</a>
@@ -155,16 +168,6 @@
                                 <li>
                                     <a href="alert.html">Alerts</a>
                                 </li>
-                                <li>
-                                    <a href="progress-bar.html">Progress Bars</a>
-                                </li>
-                                <li>
-                                    <a href="modal.html">Modals</a>
-                                </li>
-                                <li>
-                                    <a href="switch.html">Switchs</a>
-                                </li>
-                                <li>
                                     <a href="grid.html">Grids</a>
                                 </li>
                                 <li>
@@ -198,8 +201,23 @@
                                 <li>
                                     <a href="{{route('users')}}"><i class="zmdi zmdi-account-circle"></i></i>All users</a>
                                 </li>
+
                                 <li>
-                                    <a href="{{route('withdrawalrequests')}}"><i class="zmdi zmdi-minus"></i>Withdrawal</a>
+
+                                    <li class="active has-sub">
+                                        <a class="js-arrow" href="#">
+                                            <i class="fas fa-tachometer-alt"></i>Withdrawals</a>
+                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+
+                                            <li>
+                                                <a href="{{route('approvedwithdrawals')}}">Approved Withdrawals<span class="text-right" id="">(17)</span></a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route('pendingwithdrawals')}}">Pending-Withdrawals<span class="text-right" id="">(12)</span></a>
+
+                                        </ul>
+                                    </li>
+
                                 </li>
                                 <li>
 
@@ -248,10 +266,9 @@
                                 <i class="fas fa-copy"></i>Site Settings</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="login.html">Pages</a>
-                                </li>
+                                    <a href="{{ route("pages") }}">Pages</a>                                </li>
                                 <li>
-                                    <a href="register.html">Site Properties</a>
+                                    <a href="{{ route("viewfaqs") }}">Faqs</a>
                                 </li>
                                 <li>
                                     <a href="forget-pass.html">Users</a>
