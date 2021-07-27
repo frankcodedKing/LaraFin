@@ -69,29 +69,19 @@
                         <tbody>
                             @if ($users)
                             @foreach ($users as $user)
-                            @if ($user->blocked = 0)
-                                $blocked ="<button class='item' data-toggle='tooltip' data-placement='top' title='click to block user'>
-                                    <a href='{{route("adminblock",$user->id )}}'><i class='zmdi zmdi-shield-security'></i></a>
-                                </button>";
-                            @else
-                                $blocked = "<button class='item' data-toggle='tooltip' data-placement='top' title='click to unblock user'>
-                                    <a href='{{route("adminunblock",$user->id )}}'><i class='zmdi zmdi-shield-check'></i></a>
-                                </button>"
-                            @endif
-
-                            <tr class="tr-shadow">
+                                        <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">$loop->index</span>
+                                        <span class="">{{$loop->index + 1}}</span>
                                     </label>
                                 </td>
-                                <td>$user->name</td>
+                                <td>{{$user->name}}</td>
                                 <td>
-                                    <span class="desc">$user->email</span>
+                                    <span class="desc">{{$user->email}}</span>
                                 </td>
 
-                                <td>$user->phone</td>
+                                <td>{{$user->phone}}</td>
 
                                 <td>
                                     <div class="table-data-feature">
@@ -105,7 +95,15 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete user">
                                             <a href="{{route('adminuserdelete',$user->id )}}"><i class="zmdi zmdi-delete"></i></a>
                                         </button>
-                                        $blocked
+                                        @if ($user->blocked == 0)
+                                         <button class='item' data-toggle='tooltip' data-placement='top' title='click to block user'>
+                                            <a href='{{route("adminblock",$user->id )}}'><i class='zmdi zmdi-shield-security'></i></a>
+                                        </button>
+                                    @else
+                                        <button class='item' data-toggle='tooltip' data-placement='top' title='click to unblock user'>
+                                            <a href='{{route("adminunblock",$user->id )}}'><i class='zmdi zmdi-shield-check'></i></a>
+                                        </button>
+                                    @endif
 
                                     </div>
                                 </td>

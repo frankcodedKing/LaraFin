@@ -51,57 +51,64 @@
                     </div>
 
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
+                    <div class="table table-responsive">
+                        <table class="table" style="background-color: rgb(54, 54, 92)">
+                            <thead>
+                                <tr>
+                                    <th>
 
 
-                                        <span class="">ID</span>
+                                            <span class="">ID</span>
 
-                                </th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Deposit</th>
-                                <th>Balance</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                                    </th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Balance</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="{{route('updateuser')}}" method="post">
+                                    @csrf
+                                    <tr class="tr-shadow">
+                                        <td>
+                                            <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="desc">lori@example.com</span>
-                                </td>
+                                                <span class="">1</span>
+                                            </label>
+                                        </td>
+                                        <td><input type="text" name="name" value="{{ $userDetail? $userDetail->name :'no name'}}">
+                                        <input type="text" name="id" value="{{$userDetail->id}}" id="">
+                                        </td>
+                                        <td>
+                                            <span class="desc">
+                                                <input type="email" value="{{ $userDetail? $userDetail->email :'no email'}}" name="email">
+                                            </span>
+                                        </td>
 
-                                <td>01234567890</td>
-                                <td>
-                                    <span class="desc">$67476</span>
-                                </td>
-                                <td>$679.00</td>
-                                <td>
-                                    <div class="table-data-feature">
+                                        <td><input type="number" name="phone" value="{{ $userDetail? $userDetail->phone :'no phone'}}"></td>
+                                        <td>
+                                            <span class="desc">
+                                                <input type="number" name="balance" value="{{ $userDetail? $userDetail->balance :'erro showing balace'}}"></span>
+                                        </td>
 
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
+                                        <td>
+                                            <div class="table-data-feature">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
-                        </tbody>
-                    </table>
+                                                <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button>
+
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </form>
+                                <tr class="spacer"></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
 
@@ -115,52 +122,68 @@
                     </div>
 
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
+                    <div class="table table-responsive">
+                        <table class="table" style="background-color: rgb(80, 78, 177);color:wheat">
+                            <thead>
+                                <tr>
+                                    <th>
 
 
-                                        <span class="">ID</span>
+                                            <span class="">ID</span>
 
-                                </th>
-                                <th>Amount</th>
-                                <th>Date</th>
+                                    </th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
 
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($userDeposits)
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td>$984</td>
-                                <td>
-                                    <span class="desc">12232</span>
-                                </td>
+                                @foreach ( $userDeposits as $Deposit )
+                                <tr class="tr-shadow">
+                                    <form action="{{route("depositupdate")}}" method="post">
+                                        @csrf
+                                        <td>
+                                            <label class="">
+
+                                                <span class="">1</span>
+                                            </label>
+                                        </td>
+                                        <td><input type="number" name="amount" value="{{ $Deposit? $Deposit->amount :'error showing amount'}}">
+                                        <input type="text" name="id" disabled hidden value="{{$Deposit->userid}}">
+                                        </td>
+                                        <td>
+                                            <span class="desc"> <input type="date" name="depositdate" value="{{ $Deposit? $Deposit->depositDate :'error showing amount'}}"></span>
+                                        </td>
 
 
-                                <td>
-                                    <div class="table-data-feature">
 
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
+                                        <td>
+                                            <div class="table-data-feature">
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
+                                                <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button>
+                                    </form>
+                                            <a href="{{route('deletedeposit',$Deposit->userid)}}">
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button></a>
 
-                        </tbody>
-                    </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                @endforeach
+
+                                @endif
+
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
 
@@ -186,34 +209,42 @@
                                 </th>
                                 <th>Amount</th>
                                 <th>Date</th>
+                                <th>Method</th>
 
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                            <form action="{{route("adddeposit")}}" method="post">
+                                @csrf
+                                <tr class="tr-shadow">
+                                    <td>
+                                        <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td><input type="number" name="depositamt" id="" placeholder="Amount" style="padding: 5px;"></td>
-                                <td>
-                                    <span class="desc"><input type="date" name="date" id="" style="padding: 5px;"></span>
-                                </td>
-
-
-                                <td>
-                                    <div class="table-data-feature">
-
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="add">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
+                                            <span class="">1</span>
+                                        </label>
+                                    </td>
+                                    <td><input type="number" name="depositamount" id="" placeholder="Amount" style="padding: 5px;"></td>
+                                    <td>
+                                        <span class="desc"><input type="date" name="depositdate" id="" style="padding: 5px;"></span>
+                                    </td>
+                                    <td>
+                                        <span class="desc"><input type="string" name="method" id="" style="padding: 5px;"></span>
+                                        <input type="text" value="{{$userDetail->id}}"  name="id"  disabled hidden>
+                                    </td>
 
 
-                                    </div>
-                                </td>
+                                    <td>
+                                        <div class="table-data-feature">
+
+                                            <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="add">
+                                                <i class="zmdi zmdi-plus"></i>
+                                            </button>
+
+
+                                        </div>
+                                    </td>
+                            </form>
                             </tr>
                             <tr class="spacer"></tr>
 
@@ -234,61 +265,135 @@
         </div>
 
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
+<div class="table table-responsive">
+    <table class="table" style="background-color: rgb(131, 44, 58)">
+        <thead>
+            <tr>
+                <th>
 
 
-                            <span class="">ID</span>
+                        <span class="">ID</span>
 
-                    </th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Deposit</th>
-                    <th>Balance</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr-shadow">
+                </th>
+                <th>Name</th>
+                <th>withdrawal date</th>
+                <th>amount</th>
+                <th>method</th>
+                <th>account</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if ($userWithdrawals)
+                @foreach ( $userWithdrawals as $withdrawal)
+                <form action="{{route("editwithdrawal")}}" method="post">
+                    <tr class="tr-shadow">
                     <td>
                         <label class="">
 
-                            <span class="">1</span>
+                            <span class=""> {{$loop->index + 1}}</span>
+                            <input type="text" disabled hidden name="id"  value="{{$withdrawal->id}}" id="">
                         </label>
                     </td>
-                    <td>Lori Lynch</td>
+                    <td><input type="text" name="name" value="{{ $withdrawal? $withdrawal->name :'error showing name'}}" id=""></td>
                     <td>
-                        <span class="desc">lori@example.com</span>
+                        <span class="desc"><input type="date" name="withdrawaldate" id="" value="{{ $withdrawal? $withdrawal->withdrawaltDate :'error showing date'}}"></span>
                     </td>
 
-                    <td>01234567890</td>
+                    <td><input type="number" name="amount" id="" value="{{ $withdrawal? $withdrawal->amount :'error showing amount'}}"></td>
                     <td>
-                        <span class="desc">$67476</span>
+                        <span class="desc"><input type="text" name="method" value="{{ $withdrawal? $withdrawal->method :'error showing method'}}"></span>
                     </td>
-                    <td>$679.00</td>
+                    <td><input type="text" name="methodaccount" value="{{ $withdrawal? $withdrawal->methodAccount :'error showing account'}}"></td>
                     <td>
                         <div class="table-data-feature">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                <i class="zmdi zmdi-account"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+
+                            <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
                                 <i class="zmdi zmdi-edit"></i>
                             </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <i class="zmdi zmdi-delete"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                <i class="zmdi zmdi-more"></i>
-                            </button>
+                            <a href="{{route("deletewithdrawal", $withdrawal->id)}}">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                            </a>
+
                         </div>
                     </td>
                 </tr>
                 <tr class="spacer"></tr>
-            </tbody>
-        </table>
+                </form>
+                @endforeach
+            @endif
+
+        </tbody>
+    </table>
+</div>
+    </div>
+
+
+
+    <div class="table-responsive table-responsive-data2">
+
+        <div class="card-header">
+            <strong>ADD Withdrawal</strong>
+
+        </div>
+        <div class="table table-responsive">
+            <table class="table" style="background-color:rgb(184, 63, 83) ">
+                <thead>
+                    <tr>
+                        <th>
+
+
+                                <span class="">ID</span>
+
+                        </th>
+                        <th>Amount</th>
+                        <th>method (e.g bitcoin)</th>
+                        <th>method Account</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="tr-shadow">
+                        <form action="{{route("addwithdrawal")}}" method="post">
+                            @csrf
+                            <td>
+                                <label class="">
+
+                                    <span class="">1</span>
+                                </label>
+                            </td>
+                            <td><input type="number" name="withdrawalamount" id="" placeholder="Amount" style="padding: 5px;"></td>
+
+                            <td><input type="text" name="method" id="" placeholder="method example bitcoin, paypal, perfect mo ney" style="padding: 5px;"></td>
+                            <td><input type="text" name="account" id="" placeholder="e.g perfect money id, btc address" style="padding: 5px;"></td>
+                            <td>
+                                <span class="desc"><input type="date" name="withdrawaldate" id="" style="padding: 5px;"></span>
+                            </td>
+                            <td><input type="text" name="name" value placeholder="name">
+                            <input type="text" name="userid" value="{{$userDetail->id}}" disabled hidden id=""></td>
+
+
+
+                            <td>
+                                <div class="table-data-feature">
+
+                                    <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="add">
+                                        <i class="zmdi zmdi-minus"></i>
+                                    </button>
+
+
+                                </div>
+                            </td>
+                        </form>
+                    </tr>
+                    <tr class="spacer"></tr>
+
+                </tbody>
+            </table>
+        </div>
     </div>
  {{-- DEPOSITSTOP --}}
 
@@ -302,133 +407,74 @@
         </div>
 
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
+        <div class="table table-responsive">
+            <table class="table" style="background-color: yellowgreen">
+                <thead>
+                    <tr>
+                        <th>
 
 
-                            <span class="">ID</span>
+                                <span class="">ID</span>
 
-                    </th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Deposit</th>
-                    <th>Balance</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr-shadow">
-                    <td>
-                        <label class="">
+                        </th>
+                        <th>Investment date</th>
+                        <th>profit percent</th>
+                        <th>maturituy date</th>
+                        <th>invested amount</th>
+                        <th>expected profit</th>
+                        <th>total amount</th>
 
-                            <span class="">1</span>
-                        </label>
-                    </td>
-                    <td>Lori Lynch</td>
-                    <td>
-                        <span class="desc">lori@example.com</span>
-                    </td>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($userInvestments)
+                    @foreach ($userInvestments as $investments)
+                    <form action="{{route("editinvestment")}}" method="POST">
+                        @csrf
+                        <tr class="tr-shadow">
+                            <td><label class="">
+                                    <span class="">{{$loop->index + 1}}</span>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="text" name="id" value="{{$investments->id}}" disabled hidden>
+                                <input type="date" name="investmentdate" value="{{$investments? $investments->investmentdate: "date not set"}}" id="">
+                            </td>
 
-                    <td>01234567890</td>
-                    <td>
-                        <span class="desc">$67476</span>
-                    </td>
-                    <td>$679.00</td>
-                    <td>
-                        <div class="table-data-feature">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                <i class="zmdi zmdi-account"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="zmdi zmdi-edit"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <i class="zmdi zmdi-delete"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                <i class="zmdi zmdi-more"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="spacer"></tr>
-            </tbody>
-        </table>
-    </div>
+                            <td><input type="number" name="investmentpercent" value="{{$investments? $investments->investmentpercent:"percent not set"}}" placeholder="investment percent" name="" id=""></td>
+                            <td>
+                                <input type="date" name="investmentmaturitydate" value="{{$investments? $investments->investmentmaturitydate:"maturity date not set"}}" placeholder="maturity date" name="" id="">
+                            </td>
+                            <td><input name="investmentamount" value="{{$investments? $investments->investmentamount:"invested amount not set"}}" type="number" placeholder="invested amount" name="" id=""></td>
+                            <td><input name="investmentprofit" value="{{$investments? $investments->investmentprofit:"profit not set"}}" type="number" placeholder="expected profit" name="" id=""></td>
+                            <td><input name="investmenttotalProfit"  value="{{$investments? $investments->investmenttotalProfit:"total turnover not set"}}" type="number" placeholder="total amount expected" name="" id=""></td>
 
-    {{-- RUNNINGINV --}}
+                            <td>
+                                <div class="table-data-feature">
 
-      {{-- USERREFERRALS --}}
+                                    <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </button>
+                                    <a href="{{route('deleteinvestment',$investments->id)}}">
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete investment">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                    </a>
 
-      <div class="table-responsive table-responsive-data2">
+                                </div>
+                            </td>
+                        </tr>
+                    </form>
+                    <tr class="spacer"></tr>
+                    @endforeach
 
-        <div class="card-header">
-            <strong>USER DEPOSITS</strong>
-
+                    @endif
+                </tbody>
+            </table>
         </div>
-
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-
-
-                            <span class="">ID</span>
-
-                    </th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Deposit</th>
-                    <th>Balance</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="tr-shadow">
-                    <td>
-                        <label class="">
-
-                            <span class="">1</span>
-                        </label>
-                    </td>
-                    <td>Lori Lynch</td>
-                    <td>
-                        <span class="desc">lori@example.com</span>
-                    </td>
-
-                    <td>01234567890</td>
-                    <td>
-                        <span class="desc">$67476</span>
-                    </td>
-                    <td>$679.00</td>
-                    <td>
-                        <div class="table-data-feature">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                <i class="zmdi zmdi-account"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                <i class="zmdi zmdi-edit"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <i class="zmdi zmdi-delete"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                <i class="zmdi zmdi-more"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr class="spacer"></tr>
-            </tbody>
-        </table>
     </div>
 
-    {{-- ENDUSERREF --}}
 
 
             </div>
