@@ -29,16 +29,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/nanoadmin', [App\Http\Controllers\adminController::class, 'adminindex'])->name('adminindex');
 Route::get('/pages', [App\Http\Controllers\adminController::class, 'pages'])->name('pages');
 Route::get('/users', [App\Http\Controllers\adminController::class, 'users'])->name('users');
+Route::get('/pendingwithdrawals', [App\Http\Controllers\adminController::class, 'pendingwithdrawals'])->name('pendingwithdrawals');
+Route::get('/approvedwithdrawals', [App\Http\Controllers\adminController::class, 'approvedwithdrawals'])->name('approvedwithdrawals');
 Route::get('/approveddeposits', [App\Http\Controllers\adminController::class, 'approveddeposits'])->name('approveddeposits');
 Route::get('/pendingdeposits', [App\Http\Controllers\adminController::class, 'pendingdeposits'])->name('pendingdeposits');
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'userreferrals'])->name('userreferrals');
-Route::get('/withdrawalrequests', [App\Http\Controllers\adminController::class, 'withdrawalrequests'])->name('withdrawalrequests');
 Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 'runninginvestments'])->name('runninginvestments');
 Route::get('/viewuser', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
-
+Route::get('/viewfaqs', [App\Http\Controllers\adminController::class, 'viewfaqs'])->name('viewfaqs');
 
 //routes to preven error
-Route::get('/savecompanydetial', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanydetial');
+Route::get('/savecompanydetails', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanydetaills');
 Route::get('/savecompanyabout', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyabout');
 Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyfaq');
 

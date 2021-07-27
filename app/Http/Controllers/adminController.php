@@ -139,10 +139,16 @@ class adminController extends Controller
     }
 
 
-    public function withdrawalrequests()
+    public function pendingwithdrawals()
     {
-        return view("admin.withdrawalrequests");
+        return view("admin.pendingwithdrawals");
     }
+
+    public function approvedwithdrawals()
+    {
+        return view("admin.approvedwithdrawals");
+    }
+
 
     public function runninginvestments()
     {
@@ -161,6 +167,10 @@ class adminController extends Controller
     }
 
 
+    public function viewfaqs()
+    {
+        return view("admin.faqs");
+    }
 
 
 
