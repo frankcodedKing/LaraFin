@@ -69,7 +69,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <form action="" method="post">
+                                <form action="{{route('updateuser')}}" method="post">
+                                    @csrf
                                     <tr class="tr-shadow">
                                         <td>
                                             <label class="">
@@ -77,20 +78,25 @@
                                                 <span class="">1</span>
                                             </label>
                                         </td>
-                                        <td><input type="text" value="{{ $userDetail? $userDetail->name :'no name'}}"></td>
+                                        <td><input type="text" name="name" value="{{ $userDetail? $userDetail->name :'no name'}}">
+                                        <input type="text" name="id" value="{{$userDetail->id}}" id="">
+                                        </td>
                                         <td>
-                                            <span class="desc"><input type="email" value="{{ $userDetail? $userDetail->email :'no email'}}"></span>
+                                            <span class="desc">
+                                                <input type="email" value="{{ $userDetail? $userDetail->email :'no email'}}" name="email">
+                                            </span>
                                         </td>
 
-                                        <td><input type="number" value="{{ $userDetail? $userDetail->phone :'no phone'}}"></td>
+                                        <td><input type="number" name="phone" value="{{ $userDetail? $userDetail->phone :'no phone'}}"></td>
                                         <td>
-                                            <span class="desc"><input type="number" value="{{ $userDetail? $userDetail->balance :'erro showing balace'}}"></span>
+                                            <span class="desc">
+                                                <input type="number" name="balance" value="{{ $userDetail? $userDetail->balance :'erro showing balace'}}"></span>
                                         </td>
 
                                         <td>
                                             <div class="table-data-feature">
 
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
 
@@ -137,35 +143,43 @@
 
                                 @foreach ( $userDeposits as $Deposit )
                                 <tr class="tr-shadow">
-                                    <td>
-                                        <label class="">
+                                    <form action="{{route("depositupdate")}}" method="post">
+                                        @csrf
+                                        <td>
+                                            <label class="">
 
-                                            <span class="">1</span>
-                                        </label>
-                                    </td>
-                                    <td><input type="number" value="{{ $Deposit? $Deposit->amount :'error showing amount'}}"></td>
-                                    <td>
-                                        <span class="desc"> <input type="date" value="{{ $Deposit? $Deposit->depositDate :'error showing amount'}}"></span>
-                                    </td>
+                                                <span class="">1</span>
+                                            </label>
+                                        </td>
+                                        <td><input type="number" name="amount" value="{{ $Deposit? $Deposit->amount :'error showing amount'}}">
+                                        <input type="text" name="id" disabled hidden value="{{$Deposit->userid}}">
+                                        </td>
+                                        <td>
+                                            <span class="desc"> <input type="date" name="depositdate" value="{{ $Deposit? $Deposit->depositDate :'error showing amount'}}"></span>
+                                        </td>
 
 
-                                    <td>
-                                        <div class="table-data-feature">
 
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                        <td>
+                                            <div class="table-data-feature">
+
+                                                <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <i class="zmdi zmdi-edit"></i>
+                                                </button>
+                                    </form>
+                                            <a href="{{route('deletedeposit',$Deposit->userid)}}">
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
-                                            </button>
+                                            </button></a>
 
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="spacer"></tr>
                                 @endforeach
 
                                 @endif
-                                <tr class="spacer"></tr>
+
 
                             </tbody>
                         </table>
@@ -201,32 +215,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                            <form action="{{route("adddeposit")}}" method="post">
+                                @csrf
+                                <tr class="tr-shadow">
+                                    <td>
+                                        <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td><input type="number" name="depositamt" id="" placeholder="Amount" style="padding: 5px;"></td>
-                                <td>
-                                    <span class="desc"><input type="date" name="date" id="" style="padding: 5px;"></span>
-                                </td>
-                                <td>
-                                    <span class="desc"><input type="string" name="" id="" style="padding: 5px;"></span>
-                                </td>
-
-
-                                <td>
-                                    <div class="table-data-feature">
-
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="add">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
+                                            <span class="">1</span>
+                                        </label>
+                                    </td>
+                                    <td><input type="number" name="depositamount" id="" placeholder="Amount" style="padding: 5px;"></td>
+                                    <td>
+                                        <span class="desc"><input type="date" name="depositdate" id="" style="padding: 5px;"></span>
+                                    </td>
+                                    <td>
+                                        <span class="desc"><input type="string" name="method" id="" style="padding: 5px;"></span>
+                                        <input type="text" value="{{$userDetail->id}}"  name="id"  disabled hidden>
+                                    </td>
 
 
-                                    </div>
-                                </td>
+                                    <td>
+                                        <div class="table-data-feature">
+
+                                            <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="add">
+                                                <i class="zmdi zmdi-plus"></i>
+                                            </button>
+
+
+                                        </div>
+                                    </td>
+                            </form>
                             </tr>
                             <tr class="spacer"></tr>
 
@@ -268,43 +286,45 @@
         <tbody>
             @if ($userWithdrawals)
                 @foreach ( $userWithdrawals as $withdrawal)
-                <tr class="tr-shadow">
+                <form action="{{route("editwithdrawal")}}" method="post">
+                    <tr class="tr-shadow">
                     <td>
                         <label class="">
 
                             <span class=""> {{$loop->index + 1}}</span>
+                            <input type="text" disabled hidden name="id"  value="{{$withdrawal->id}}" id="">
                         </label>
                     </td>
-                    <td><input type="text" name="" value="{{ $withdrawal? $withdrawal->name :'error showing name'}}" id=""></td>
+                    <td><input type="text" name="name" value="{{ $withdrawal? $withdrawal->name :'error showing name'}}" id=""></td>
                     <td>
-                        <span class="desc"><input type="date" name="" id="" value="{{ $withdrawal? $withdrawal->withdrawaltDate :'error showing date'}}"></span>
+                        <span class="desc"><input type="date" name="withdrawaldate" id="" value="{{ $withdrawal? $withdrawal->withdrawaltDate :'error showing date'}}"></span>
                     </td>
 
-                    <td><input type="number" name="" id="" value="{{ $withdrawal? $withdrawal->amount :'error showing amount'}}"></td>
+                    <td><input type="number" name="amount" id="" value="{{ $withdrawal? $withdrawal->amount :'error showing amount'}}"></td>
                     <td>
-                        <span class="desc"><input type="text" value="{{ $withdrawal? $withdrawal->method :'error showing method'}}"></span>
+                        <span class="desc"><input type="text" name="method" value="{{ $withdrawal? $withdrawal->method :'error showing method'}}"></span>
                     </td>
-                    <td><input type="text" value="{{ $withdrawal? $withdrawal->methodAccount :'error showing account'}}"></td>
+                    <td><input type="text" name="methodaccount" value="{{ $withdrawal? $withdrawal->methodAccount :'error showing account'}}"></td>
                     <td>
                         <div class="table-data-feature">
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                <i class="zmdi zmdi-account"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+
+                            <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
                                 <i class="zmdi zmdi-edit"></i>
                             </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                <i class="zmdi zmdi-delete"></i>
-                            </button>
-                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                <i class="zmdi zmdi-more"></i>
-                            </button>
+                            <a href="{{route("deletewithdrawal", $withdrawal->id)}}">
+                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                    <i class="zmdi zmdi-delete"></i>
+                                </button>
+                            </a>
+
                         </div>
                     </td>
                 </tr>
+                <tr class="spacer"></tr>
+                </form>
                 @endforeach
             @endif
-            <tr class="spacer"></tr>
+
         </tbody>
     </table>
 </div>
@@ -332,36 +352,42 @@
                         <th>method (e.g bitcoin)</th>
                         <th>method Account</th>
                         <th>Date</th>
-                        <th></th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="tr-shadow">
-                        <td>
-                            <label class="">
+                        <form action="{{route("addwithdrawal")}}" method="post">
+                            @csrf
+                            <td>
+                                <label class="">
 
-                                <span class="">1</span>
-                            </label>
-                        </td>
-                        <td><input type="number" name="depositamt" id="" placeholder="Amount" style="padding: 5px;"></td>
+                                    <span class="">1</span>
+                                </label>
+                            </td>
+                            <td><input type="number" name="withdrawalamount" id="" placeholder="Amount" style="padding: 5px;"></td>
 
-                        <td><input type="text" name="method" id="" placeholder="method example bitcoin, paypal, perfect mo ney" style="padding: 5px;"></td>
-                        <td><input type="text" name="account" id="" placeholder="e.g perfect money id, btc address" style="padding: 5px;"></td>
-                        <td>
-                            <span class="desc"><input type="date" name="date" id="" style="padding: 5px;"></span>
-                        </td>
-
-
-                        <td>
-                            <div class="table-data-feature">
-
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="add">
-                                    <i class="zmdi zmdi-minus"></i>
-                                </button>
+                            <td><input type="text" name="method" id="" placeholder="method example bitcoin, paypal, perfect mo ney" style="padding: 5px;"></td>
+                            <td><input type="text" name="account" id="" placeholder="e.g perfect money id, btc address" style="padding: 5px;"></td>
+                            <td>
+                                <span class="desc"><input type="date" name="withdrawaldate" id="" style="padding: 5px;"></span>
+                            </td>
+                            <td><input type="text" name="name" value placeholder="name">
+                            <input type="text" name="userid" value="{{$userDetail->id}}" disabled hidden id=""></td>
 
 
-                            </div>
-                        </td>
+
+                            <td>
+                                <div class="table-data-feature">
+
+                                    <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="add">
+                                        <i class="zmdi zmdi-minus"></i>
+                                    </button>
+
+
+                                </div>
+                            </td>
+                        </form>
                     </tr>
                     <tr class="spacer"></tr>
 
@@ -404,36 +430,42 @@
                 <tbody>
                     @if ($userInvestments)
                     @foreach ($userInvestments as $investments)
-                    <tr class="tr-shadow">
-                        <td><label class="">
-                                <span class="">{{$loop->index + 1}}</span>
-                            </label>
-                        </td>
-                        <td>
-                            <input type="date" name="" value="{{$investments? $investments->investmentdate: "date not set"}}" id="">
-                        </td>
+                    <form action="{{route("editinvestment")}}" method="POST">
+                        @csrf
+                        <tr class="tr-shadow">
+                            <td><label class="">
+                                    <span class="">{{$loop->index + 1}}</span>
+                                </label>
+                            </td>
+                            <td>
+                                <input type="text" name="id" value="{{$investments->id}}" disabled hidden>
+                                <input type="date" name="investmentdate" value="{{$investments? $investments->investmentdate: "date not set"}}" id="">
+                            </td>
 
-                        <td><input type="number" value="{{$investments? $investments->investmentpercent:"percent not set"}}" placeholder="investment percent" name="" id=""></td>
-                        <td>
-                            <input type="date" value="{{$investments? $investments->investmentmaturitydate:"maturity date not set"}}" placeholder="maturity date" name="" id="">
-                        </td>
-                        <td><input value="{{$investments? $investments->investmentamount:"invested amount not set"}}" type="number" placeholder="invested amount" name="" id=""></td>
-                        <td><input value="{{$investments? $investments->investmentprofit:"profit not set"}}" type="number" placeholder="expected profit" name="" id=""></td>
-                        <td><input  value="{{$investments? $investments->investmenttotalProfit:"total turnover not set"}}" type="number" placeholder="total amount expected" name="" id=""></td>
+                            <td><input type="number" name="investmentpercent" value="{{$investments? $investments->investmentpercent:"percent not set"}}" placeholder="investment percent" name="" id=""></td>
+                            <td>
+                                <input type="date" name="investmentmaturitydate" value="{{$investments? $investments->investmentmaturitydate:"maturity date not set"}}" placeholder="maturity date" name="" id="">
+                            </td>
+                            <td><input name="investmentamount" value="{{$investments? $investments->investmentamount:"invested amount not set"}}" type="number" placeholder="invested amount" name="" id=""></td>
+                            <td><input name="investmentprofit" value="{{$investments? $investments->investmentprofit:"profit not set"}}" type="number" placeholder="expected profit" name="" id=""></td>
+                            <td><input name="investmenttotalProfit"  value="{{$investments? $investments->investmenttotalProfit:"total turnover not set"}}" type="number" placeholder="total amount expected" name="" id=""></td>
 
-                        <td>
-                            <div class="table-data-feature">
+                            <td>
+                                <div class="table-data-feature">
 
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                    <i class="zmdi zmdi-edit"></i>
-                                </button>
-                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                    <i class="zmdi zmdi-delete"></i>
-                                </button>
+                                    <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="Edit">
+                                        <i class="zmdi zmdi-edit"></i>
+                                    </button>
+                                    <a href="{{route('deleteinvestment',$investments->id)}}">
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete investment">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                    </a>
 
-                            </div>
-                        </td>
-                    </tr>
+                                </div>
+                            </td>
+                        </tr>
+                    </form>
                     <tr class="spacer"></tr>
                     @endforeach
 

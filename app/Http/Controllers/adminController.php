@@ -336,4 +336,179 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
 
 
     }
+
+    public function updateuser (Request $req) {
+        $id =$req->id;
+        $name =$req->name;
+        $email =$req->email;
+        $phone =$req->phone;
+        $balance =$req->balance;
+        $saveArray = ["name"=>$name, "email"=>$email,"phone" =>$phone,"balance"=>$balance];
+        $result = $this->savedata(User::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "update was succesful");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to update");
+        }
+
+
+
+    }
+    public function depositupdate (Request $req) {
+        $id =$req->id;
+        $depositdate = $req-> depositdate;
+        $amount =$req->amount;
+
+        $saveArray = ["amount"=>$amount, "depositdate"=>$depositdate];
+        $result = $this->savedata(Deposit::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "deposit update was succesful");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to update deposit");
+        }
+
+    }
+    public function deletedeposit (Request $req) {
+        $id =$req->id;
+        $result = deleteRow(Deposit::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "deposit deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to delete deposit");
+        }
+
+    }
+    public function adddeposit (Request $req) {
+        $depositamount =$req->depositamount;
+        $depositdate =$req->depositdate;
+        $method =$req->method;
+        $id =$req->id;
+
+        $saveArray = ["amount"=>$depositamount, "depositdate"=>$depositdate, "method"=>$method, "userId"=>$id];
+        $result = $this->savedata(Deposit::class, "new" , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "deposit added succesful");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to add deposit");
+        }
+
+
+
+    }
+    public function editwithdrawal (Request $req) {
+        $id =$req->id;
+        $name =$req->name;
+        $withdrawaldate =$req->withdrawaldate;
+        $amount =$req->amount;
+        $method =$req->method;
+        $methodaccount =$req->methodaccount;
+
+        $saveArray = [
+            "withdrawaltdate"=>$withdrawaldate,
+         "amount"=>$amount,
+         "methodAccount"=>$methodaccount,
+          "method"=>$method,
+           "name"=>$name
+        ];
+        $result = $this->savedata(Withdrawal::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "withdrawal edited succesful");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to edit withdrawal");
+        }
+
+
+    }
+    public function deletewithdrawal (Request $req) {
+        $id =$req->id;
+        $result = deleteRow(Withdrawal::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "withdrawal deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to delete withdrawal");
+        }
+
+    }
+    public function addwithdrawal (Request $req) {
+        $id =$req->id;
+        $withdrawalamount =$req->withdrawalamount;
+        $method =$req->method;
+        $account =$req->account;
+        $withdrawaldate =$req->withdrawaldate;
+        $name=$req->name;
+        $userId= $req->userid;
+
+        $saveArray = [
+            "withdrawaltdate"=>$withdrawaldate,
+         "amount"=>$withdrawalamount,
+         "methodaccount"=>$account,
+          "method"=>$method,
+           "name"=>$name,
+           "userid"=>$userid,
+        ];
+        $result = $this->savedata(Withdrawal::class, "new" , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "deposit added succesful");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to add deposit");
+        }
+
+    }
+    public function editinvestment (Request $req) {
+        $id =$req->id;
+        $investmentdate =$req->investmentdate;
+        $investmentpercent =$req->investmentpercent;
+        $investmentmaturitydate =$req->investmentmaturitydate;
+        $investmentamount =$req->investmentamount;
+        $investmentprofit =$req->investmentprofit;
+        $investmenttotalProfit =$req->investmenttotalProfit;
+
+        $saveArray = [
+            "investmentpercent"=>$investmentpercent,
+         "investmentdate"=>$investmentdate,
+         "investmentmaturitydate"=>$investmentmaturitydate,
+          "investmentamount"=>$investmentamount,
+           "investmenttotalProfit"=>$investmenttotalProfit,
+           "investmentprofit"=>$investmentprofit,
+
+        ];
+        $result = $this->savedata(Investment::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "Investment edited succesfuly");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to edit investment");
+        }
+
+
+
+    }
+    public function deleteinvestment (Request $req) {
+        $id =$req->id;
+        $result = deleteRow(Investment::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "Investment deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to delete investment");
+        }
+
+    }
 }
+

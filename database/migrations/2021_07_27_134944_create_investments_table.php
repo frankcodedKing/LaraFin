@@ -21,7 +21,7 @@ class CreateInvestmentsTable extends Migration
             $table->string("investmentdate");
             $table->string("investmentduration");
             $table->string("investmentprofit");
-            $table->string("investmenttotalProfit");
+            $table->string("investmenttotalprofit");
             $table->string("investmentmaturitydate");
             $table->string("investmentamount");
             $table->string("investmentStatus");
