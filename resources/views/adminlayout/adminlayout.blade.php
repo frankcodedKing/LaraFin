@@ -199,7 +199,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="{{route('users')}}">All users</a>
+                                    <a href="{{route('users')}}"><i class="zmdi zmdi-account-circle"></i></i>All users</a>
                                 </li>
 
                                 <li>
@@ -217,12 +217,13 @@
 
                                         </ul>
                                     </li>
+
                                 </li>
                                 <li>
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="fas fa-tachometer-alt"></i>Deposits</a>
+                                            <i class="zmdi zmdi-plus-circle"></i></i>Deposits</a>
                                         <ul class="list-unstyled navbar__sub-list js-sub-list">
 
                                             <li>

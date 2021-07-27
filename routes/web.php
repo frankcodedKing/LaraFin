@@ -55,3 +55,9 @@ Route::post('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'sa
 Route::post('/delcompanyfaq', [App\Http\Controllers\adminController::class, 'deletecompanyfaq'])->name('deletcompanyfaq');
 Route::post('/editcompanyfaq', [App\Http\Controllers\adminController::class, 'editcompanyfaq'])->name('editcompanyfaq');
 
+Route::get('/adminuserdelete/{id}', [App\Http\Controllers\adminController::class, 'adminuserdelete'])->name('adminuserdelete');
+Route::get('/adminunblock/{id}', [App\Http\Controllers\adminController::class, 'adminunblock'])->name('adminunblock');
+Route::get('/adminblock/{id}', [App\Http\Controllers\adminController::class, 'adminblock'])->name('adminblock');
+
+
+

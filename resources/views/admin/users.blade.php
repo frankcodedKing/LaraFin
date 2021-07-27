@@ -63,48 +63,59 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Deposit</th>
-                                <th>Balance</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($users)
+                            @foreach ($users as $user)
+                            @if ($user->blocked = 0)
+                                $blocked ="<button class='item' data-toggle='tooltip' data-placement='top' title='click to block user'>
+                                    <a href='{{route("adminblock",$user->id )}}'><i class='zmdi zmdi-shield-security'></i></a>
+                                </button>";
+                            @else
+                                $blocked = "<button class='item' data-toggle='tooltip' data-placement='top' title='click to unblock user'>
+                                    <a href='{{route("adminunblock",$user->id )}}'><i class='zmdi zmdi-shield-check'></i></a>
+                                </button>"
+                            @endif
+
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">1</span>
+                                        <span class="">$loop->index</span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
+                                <td>$user->name</td>
                                 <td>
-                                    <span class="desc">lori@example.com</span>
+                                    <span class="desc">$user->email</span>
                                 </td>
 
-                                <td>01234567890</td>
-                                <td>
-                                    <span class="desc">$67476</span>
-                                </td>
-                                <td>$679.00</td>
+                                <td>$user->phone</td>
+
                                 <td>
                                     <div class="table-data-feature">
 
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                            <a href="{{route('viewuser')}}"><i class="zmdi zmdi-account"></i></a>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="view user in detail">
+                                            <a href="{{route('viewuser',$user->id)}}"><i class="zmdi zmdi-account"></i></a>
                                         </button>
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
+                                            <a href=""><i class="zmdi zmdi-edit"></i></a>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete user">
+                                            <a href="{{route('adminuserdelete',$user->id )}}"><i class="zmdi zmdi-delete"></i></a>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
+                                        $blocked
+
                                     </div>
                                 </td>
                             </tr>
                             <tr class="spacer"></tr>
+
+                            @endforeach
+                            {{ $users->onEachSide(6)->links() }}
+                            @endif
+
                         </tbody>
                     </table>
                 </div>

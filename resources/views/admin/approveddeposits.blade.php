@@ -68,42 +68,42 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody> @if ($approvedDeposit)
+                            @foreach ($approvedDeposit as $deposit)
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">1</span>
+                                        <span class="">$loop->index</span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
+                                <td>$deposit->name</td>
                                 <td>
-                                    <span class="desc">lori@example.com</span>
+                                    <span class="desc">$deposit->email</span>
                                 </td>
 
-                                <td>01234567890</td>
-                                <td>
-                                   <span class="desc">$67476</span>
-                                </td>
-                                <td>$679.00</td>
+                                <td>$deposit->method</td>
+                                <form action="" method="">
+                                <td>$deposit->method</td>
+                                <td>$deposit->method</td>
+
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                            <i class="zmdi zmdi-account"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                        <button class="item" data-toggle="tooltip" type="submit" data-placement="top" title="Delete">
                                             <i class="zmdi zmdi-delete"></i>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
+
+
                                     </div>
                                 </td>
+                            </form>
                             </tr>
                             <tr class="spacer"></tr>
+
+                            @endforeach
+                            {{ $approvedDeposit->onEachSide(6)->links() }}
+                            @endif
+
                         </tbody>
                     </table>
                 </div>
