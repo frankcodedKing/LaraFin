@@ -3,11 +3,6 @@
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
-    tinymce.init({
-      selector: 'textarea',
-      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-      toolbar_mode: 'floating',
-   });
 
 
 tinymce.init({
@@ -40,7 +35,7 @@ tinymce.init({
                                 <div class="form-group has-success">
                                     <label for="cc-name" class="control-label mb-1">Write Company description Below</label>
                                     <textarea id="default" name="about_text"  cols="15" value="" rows="13">
-                                        {{ isset($companyDetail) ? $companyDetail->aboutText: 'write brief description about the company'}}
+                                        {{ isset($companydetails) ? $companydetails->aboutText: 'write brief description about the company'}}
                                     </textarea>
 
                                     {{-- <textarea style="background-color: rgb(137, 204, 243)" name="" id="" cols="40" rows="30"></textarea> --}}
