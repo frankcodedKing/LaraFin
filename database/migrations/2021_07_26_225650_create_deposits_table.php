@@ -21,6 +21,7 @@ class CreateDepositsTable extends Migration
             $table->string("method");
             $table->string("methodAccount");
             $table->string("status")->default(0);
+            $table->string("userId");
         });
     }
 

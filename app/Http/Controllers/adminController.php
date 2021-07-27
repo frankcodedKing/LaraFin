@@ -6,6 +6,7 @@ use App\Models\Faq;
 use App\Models\User;
 use App\Models\Deposit;
 use App\Models\Withdrawal;
+use App\Models\Investment;
 use Illuminate\Http\Request;
 
 class adminController extends Controller
@@ -121,6 +122,7 @@ class adminController extends Controller
         $users = User::paginate(15);
         $data =["users"=> $users];
         return view("admin.users", $data);
+
     }
 
     public function pendingdeposits()
@@ -155,9 +157,17 @@ class adminController extends Controller
     }
 
 
-    public function viewuser()
+    public function viewuser(Request $req)
     {
-        return view("admin.viewuser");
+        $userid = $req->id;
+
+        $userDetail = User::where("id", $userid)->first();
+        $userWithdrawals= Withdrawal::where("userid", $userid)->get();
+        $userInvestments= Investment::where("userid", $userid)->get();
+        $userDeposits= Deposit::where("userid", $userid)->get();
+        $data =["userDetail"=>$userDetail, "userWithdrawals"=>$userWithdrawals, "userDeposits"=> $userDeposits, "userInvestments"=>$userInvestments];
+
+        return view("admin.viewuser", $data);
     }
 
 

@@ -34,7 +34,7 @@ Route::get('/pendingdeposits', [App\Http\Controllers\adminController::class, 'pe
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'userreferrals'])->name('userreferrals');
 Route::get('/withdrawalrequests', [App\Http\Controllers\adminController::class, 'withdrawalrequests'])->name('withdrawalrequests');
 Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 'runninginvestments'])->name('runninginvestments');
-Route::get('/viewuser', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
+Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
 
 //routes to preven error

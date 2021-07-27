@@ -20,6 +20,7 @@ class CreateWithdrawalsTable extends Migration
             $table->integer("amount");
             $table->string("method");
             $table->string("methodAccount");
+            $table->string("userId");
             $table->string("status")->default(0);
         });
     }
