@@ -38,9 +38,15 @@ Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
 
-
-Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
+//referals
+Route::get('/viewuserreferrals{id}', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
+Route::get('/payreferral', [App\Http\Controllers\adminController::class, 'payreferral'])->name('payreferral');
+
+Route::get('/delreferral', [App\Http\Controllers\adminController::class, 'delreferral'])->name('delreferral');
+
+
+
 Route::get('/investmentplans', [App\Http\Controllers\adminController::class, 'investmentplans'])->name('investmentplans');
 
 
@@ -81,4 +87,10 @@ Route::post('/addwithdrawal', [App\Http\Controllers\adminController::class, 'add
 
 Route::post('/editinvestment', [App\Http\Controllers\adminController::class, 'editinvestment'])->name('editinvestment');
 Route::post('/deleteinvestment/{id}', [App\Http\Controllers\adminController::class, 'deleteinvestment'])->name('deleteinvestment');
+
+Route::post('/deleteinvestmentplan/{id}', [App\Http\Controllers\adminController::class, 'deleteinvestmentplan'])->name('deleteinvestmentplan');
+Route::post('/editinvestmentplan/{id}', [App\Http\Controllers\adminController::class, 'editinvestmentplan'])->name('editinvestmentplan');
+Route::post('/createinvestmentplan', [App\Http\Controllers\adminController::class, 'createinvestmentplan'])->name('createinvestmentplan');
+
+
 

@@ -7,7 +7,10 @@ use App\Models\User;
 use App\Models\Deposit;
 use App\Models\Withdrawal;
 use App\Models\Investment;
-use Illuminate\Http\Request;
+use App\Models\Investmentplan;
+use App\Models\Referral;
+use App\Models\investmentplans;
+use Illuminate\Http\Fund;
 
 class adminController extends Controller
 {
@@ -238,22 +241,6 @@ public function deletefaqs (Request $req){
 
 }
 
-
-
-    public function viewuserreferrals()
-    {
-        return view("admin.viewuserreferrals");
-    }
-
-    public function referrals()
-    {
-        return view("admin.referrals");
-    }
-
-    public function investmentplans()
-    {
-        return view("admin.investmentplans");
-    }
 
 
     public function savecompanydetails (Request $req){
@@ -529,5 +516,158 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
         }
 
     }
+
+    public function referrals(){
+        $allrefs = [];
+       $referrals =  Referral::distinct()->get(['olduseruserid']);
+        foreach ($referrals as  $ref) {
+            # code...
+            $no0fRefferals = Referral::where("olduseruserid", $ref->olduseruserid)->get()->count();
+            $refs =["ref"=> $ref, "refno"=>$no0fRefferals];
+            array_push($allrefs, $refs);
+        }
+        $all =["refarray" => $allrefs];
+
+        return view("admin.referrals" , $all);
+    }
+
+
+
+
+
+    public function viewuserreferrals(Request $req)
+    {
+        $userid = $req->id;
+        $userRefferals = Referral::where("olduseruserid", $userid)->get();
+        $userarray=[];
+        foreach ($userRefferals as $user) {
+            # code...
+            $aUserRefferals = Fund::where("userid", $user->userid)->get();
+            $detailArray =["refdeatil"=>$aUserRefferals, "refid" =>$user->id];
+            array_push($userarray, $detailArray);
+        }
+        $data = ["userrefs" => $userarray];
+        return view("admin.viewuserreferrals", $data);
+    }
+
+
+    public function payreferral (Request $req){
+        $id = $req->id;
+        $saveArray = [
+            "status"=>1,
+                 ];
+
+        $result = $this->savedata(Referral::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("referrals")->with("success", "Referram marked as paid");
+        } else {
+            # code...
+            return redirect()->route("referrals")->with("error", "Failed to mark reffera as paid");
+        }
+
+    }
+
+    public function delreferral (Request $req){
+        $id = $req->id;
+        $result = deleteRow(Referral::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("viewuser", $id)->with("success", "Referral deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("viewuser", $id)->with("error", "failed to delete Referral");
+        }
+    }
+
+
+
+    public function investmentplans()
+    {
+        $allplan = Investment::all();
+        $data =["allplans"=>$allplan];
+
+        return view("admin.investmentplans", $data);
+    }
+
+    public function editinvestmentplan (Request $req){
+        $id = $req->id;
+        $plan = $req->plan;
+        $minimum = $req->minimum;
+        $maximum = $req->maximum;
+        $percentage = $req->percentage;
+        $duration = $req->duration;
+        $repeat = $req->repeat;
+        $noofrepeat = $req->noofrepeat;
+
+        $saveArray = [
+            "plan"=>$plan,
+         "minimum"=>$minimum,
+         "maximum"=>$maximum,
+          "percentage"=>$percentage,
+           "duration"=>$duration,
+           "repeat"=>$repeat,
+           "noofrepeat"=>$noofrepeat,
+
+        ];
+        $result = $this->savedata(Investmentplan::class, $id , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("success", "Investment edited succesfuly");
+        } else {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("error", "failed to edit investment");
+        }
+
+
+
+    }
+
+    public function createinvestmentplan (){
+
+        $plan = $req->plan;
+        $minimum = $req->minimum;
+        $maximum = $req->maximum;
+        $percentage = $req->percentage;
+        $duration = $req->duration;
+        $repeat = $req->repeat;
+        $noofrepeat = $req->noofrepeat;
+
+        $saveArray = [
+            "plan"=>$plan,
+         "minimum"=>$minimum,
+         "maximum"=>$maximum,
+          "percentage"=>$percentage,
+           "duration"=>$duration,
+           "repeat"=>$repeat,
+           "noofrepeat"=>$noofrepeat,
+
+        ];
+        $result = $this->savedata(Investmentplan::class, "new" , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("success", "Investment $plan created succesfuly");
+        } else {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("error", "failed to create $plan investment");
+        }
+
+
+    }
+
+    public function deleteinvestmentplan (Request $req) {
+        $id = $req->id;
+        $result = deleteRow(Referral::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("success", "Referral deleted succesfuly");
+        } else {
+            # code...
+            return redirect()->route("investmentplans", $id)->with("error", "failed to delete Referral");
+        }
+
+    }
+
 }
+
 

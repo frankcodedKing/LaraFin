@@ -50,49 +50,101 @@
 
                     </div>
 
+<div class="table table-responsive">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
+    <table class="table" style="background-color: rgb(226, 215, 215)">
+        <thead>
+            <tr>
+                <th>
 
 
-                                        <span class="">ID</span>
+                        <span class="">ID</span>
 
-                                </th>
-                                <th>Package Name</th>
-                                <th>Minimum Deposit</th>
-                                <th>Maximum Deposit</th>
-                                <th>Percentage</th>
-                                <th>Duration</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                </th>
+                <th>Package Name</th>
+                <th>Minimum Deposit</th>
+                <th>Maximum Deposit</th>
+                <th>Percentage</th>
+                <th>Duration</th>
+                <th>repeat</th>
+                <th>No of repeat</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if ($allplans)
+                @foreach ( $allplans as $plan )
+                <form action="{{route('editinvestmentplan')}}" method="post">
+                    @csrf
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td><input type="text" name="" id=""></td>
-                                <td>
-                                    <span class="desc"><input type="text" name="" id=""></span>
-                                </td>
+                                <span class="">{{$loop->index}}</span>
+                            </label>
+                        </td>
+                        <td><input type="text" name="plan" value="{{$plan->name}}" id=""></td>
+                        <td>
+                            <span class="desc"><input type="number" value="{{$plan->minimum}}" name="minimum" id=""></span>
+                        </td>
 
-                                <td><input type="text" name="" id=""></td>
-                                <td>
-                                    <input type="text" name="" id="">
-                                </td>
-                                <td><input type="text" name="" id=""></td>
-                                <td>
-                                    <button type="button" class="btn btn-primary">Add</button>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
-                        </tbody>
-                    </table>
+                        <td><input type="number" name="maximum" id="" value="{{$plan->maximum}}"></td>
+                        <td>
+                            <input type="text" name="percentage"  value="{{$plan->percentage}}" id="">
+                        </td>
+                        <td><input type="text" name="duration" value="{{$plan->duration}}" id=""></td>
+                        <td>
+                            <input type="text" name="repeat"  value="{{$plan->repeat}}" id="">
+                        </td>
+                        <td><input type="number" name="noofrepeat" value="{{$plan->noofrepeat}}" id=""></td>
+                        <td>
+                            <button type="button" type="submit" class="btn btn-primary">Add</button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger">delete</button>
+                        </td>
+                    </tr>
+                </form>
+                <tr class="spacer"></tr>
+                @endforeach
+            @endif
+
+            <tr class="spacer"></tr>
+            <tr><td colspan="4">Create new plan</td></tr>
+            <tr>
+                <form action="{{route('createinvestmentplan')}}" method="post">
+                    @csrf
+                    <tr class="tr-shadow">
+                        <td>
+                            <label class="">
+
+                                <span class="">1</span>
+                            </label>
+                        </td>
+                        <td><input type="text" name="plan" value="" id=""></td>
+                        <td>
+                            <span class="desc"><input type="number" value="" name="minimum" id=""></span>
+                        </td>
+
+                        <td><input type="number" name="maximum" id="" value=""></td>
+                        <td>
+                            <input type="text" name="percentage"  value="" id="">
+                        </td>
+                        <td><input type="text" name="duration" value="" id=""></td>
+                        <td>
+                            <input type="text" name="repeat"  value="" id="">
+                        </td>
+                        <td><input type="number" name="noofrepeat" value="" id=""></td>
+                        <td>
+                            <button type="button" type="submit" class="btn btn-primary">Create</button>
+                        </td>
+
+                    </tr>
+                </form>
+            </tr>
+        </tbody>
+    </table>
+</div>
                 </div>
             </div>
         </div>
