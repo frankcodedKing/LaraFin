@@ -33,10 +33,15 @@ Route::get('/pendingwithdrawals', [App\Http\Controllers\adminController::class, 
 Route::get('/approvedwithdrawals', [App\Http\Controllers\adminController::class, 'approvedwithdrawals'])->name('approvedwithdrawals');
 Route::get('/approveddeposits', [App\Http\Controllers\adminController::class, 'approveddeposits'])->name('approveddeposits');
 Route::get('/pendingdeposits', [App\Http\Controllers\adminController::class, 'pendingdeposits'])->name('pendingdeposits');
-Route::get('/referrals', [App\Http\Controllers\adminController::class, 'userreferrals'])->name('userreferrals');
 Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 'runninginvestments'])->name('runninginvestments');
 
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
+
+
+
+Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
+Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
+Route::get('/investmentplans', [App\Http\Controllers\adminController::class, 'investmentplans'])->name('investmentplans');
 
 
 

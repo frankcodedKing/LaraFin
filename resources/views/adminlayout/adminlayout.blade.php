@@ -115,12 +115,12 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Charts</a>
+                            <a href="{{route('referrals')}}">
+                                <i class="fas fa-chart-bar"></i>Refferals</a>
                         </li>
                         <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                            <a href="{{route('investmentplans')}}">
+                                <i class="fas fa-table"></i>Investment plans</a>
                         </li>
                         <li>
                             <a href="form.html">
@@ -199,7 +199,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="{{route('users')}}"><i class="zmdi zmdi-account-circle"></i></i>All users</a>
+                                    <a href="{{route('users')}}">All users</a>
                                 </li>
 
                                 <li>
@@ -217,13 +217,12 @@
 
                                         </ul>
                                     </li>
-
                                 </li>
                                 <li>
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="zmdi zmdi-plus-circle"></i></i>Deposits</a>
+                                            <i class="fas fa-tachometer-alt"></i>Deposits</a>
                                         <ul class="list-unstyled navbar__sub-list js-sub-list">
 
                                             <li>
@@ -242,12 +241,12 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="chart.html">
-                                <i class="fas fa-chart-bar"></i>Charts</a>
+                            <a href="{{route('referrals')}}">
+                                <i class="fas fa-chart-bar"></i>Refferals</a>
                         </li>
                         <li>
-                            <a href="table.html">
-                                <i class="fas fa-table"></i>Tables</a>
+                            <a href="{{route('investmentplans')}}">
+                                <i class="fas fa-table"></i>Investment plans</a>
                         </li>
                         <li>
                             <a href="form.html">

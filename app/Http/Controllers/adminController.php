@@ -157,11 +157,6 @@ class adminController extends Controller
         return view("admin.runninginvestments");
     }
 
-    public function userrefferals()
-    {
-        return view("admin.refferals");
-    }
-
 
     public function viewuser(Request $req)
     {
@@ -245,6 +240,20 @@ public function deletefaqs (Request $req){
 
 
 
+    public function viewuserreferrals()
+    {
+        return view("admin.viewuserreferrals");
+    }
+
+    public function referrals()
+    {
+        return view("admin.referrals");
+    }
+
+    public function investmentplans()
+    {
+        return view("admin.investmentplans");
+    }
 
 
     public function savecompanydetails (Request $req){
