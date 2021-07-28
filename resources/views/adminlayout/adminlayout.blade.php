@@ -73,15 +73,16 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                    <a href="{{route('users')}}">All users</a>
+                                <li class="active has-sub">
+                                    <a href="{{route('users')}}"> <i class="fas fa-user"></i>All users</a>
                                 </li>
+
                                 <li>
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="fas fa-tachometer-alt"></i>Withdrawals</a>
-                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                            <i class="fas fa-money-bill-alt"></i>Withdrawals</a>
+                                        <ul class="list-unstyled js-sub-list">
 
                                             <li>
                                                 <a href="{{route('approvedwithdrawals')}}">Approved Withdrawals<span class="text-right" id="">(17)</span></a>
@@ -89,6 +90,7 @@
                                             <li>
                                                 <a href="{{route('pendingwithdrawals')}}">Pending-Withdrawals<span class="text-right" id="">(12)</span></a>
 
+                                            </li>
                                         </ul>
                                     </li>
                                 </li>
@@ -96,7 +98,7 @@
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="fas fa-tachometer-alt"></i>Deposits</a>
+                                            <i class="fas fa-piggy-bank"></i>Deposits</a>
                                         <ul class="list-unstyled navbar__sub-list js-sub-list">
 
                                             <li>
@@ -198,16 +200,16 @@
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="{{route('users')}}">All users</a>
+                                <li class="active has-sub">
+                                    <a href="{{route('users')}}"> <i class="fas fa-user"></i>All users</a>
                                 </li>
 
                                 <li>
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="fas fa-tachometer-alt"></i>Withdrawals</a>
-                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                            <i class="fas fa-money-bill-alt"></i>Withdrawals</a>
+                                        <ul class="list-unstyled js-sub-list">
 
                                             <li>
                                                 <a href="{{route('approvedwithdrawals')}}">Approved Withdrawals<span class="text-right" id="">(17)</span></a>
@@ -215,6 +217,7 @@
                                             <li>
                                                 <a href="{{route('pendingwithdrawals')}}">Pending-Withdrawals<span class="text-right" id="">(12)</span></a>
 
+                                            </li>
                                         </ul>
                                     </li>
                                 </li>
@@ -222,8 +225,8 @@
 
                                     <li class="active has-sub">
                                         <a class="js-arrow" href="#">
-                                            <i class="fas fa-tachometer-alt"></i>Deposits</a>
-                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                            <i class="fas fa-bank"></i>Deposits</a>
+                                        <ul class="list-unstyled js-sub-list">
 
                                             <li>
                                                 <a href="{{route('approveddeposits')}}">Approved <span class="text-right" id="">(17)</span></a>
