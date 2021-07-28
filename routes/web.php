@@ -38,7 +38,6 @@ Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
 
-Route::get('/viewfaqs', [App\Http\Controllers\adminController::class, 'viewfaqs'])->name('viewfaqs');
 
 Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
@@ -57,11 +56,13 @@ Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pag
 //admin post request
 Route::post('/savecompanydetails', [App\Http\Controllers\adminController::class, 'savecompanydetails'])->name('savecompanydetails');
 Route::post('/savecompanyabout', [App\Http\Controllers\adminController::class, 'savecompanyabout'])->name('savecompanyabout');
-Route::post('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'savecompanyfaq'])->name('savecompanyfaq');
+
 
 //faqs delete and edit
-Route::post('/delcompanyfaq', [App\Http\Controllers\adminController::class, 'deletecompanyfaq'])->name('deletcompanyfaq');
-Route::post('/editcompanyfaq', [App\Http\Controllers\adminController::class, 'editcompanyfaq'])->name('editcompanyfaq');
+Route::get('/viewfaqs', [App\Http\Controllers\adminController::class, 'viewfaqs'])->name('viewfaqs');
+Route::post('/editfaqs', [App\Http\Controllers\adminController::class, 'editfaqs'])->name('editfaqs');
+Route::get('/deletefaqs{id}', [App\Http\Controllers\adminController::class, 'deletefaqs'])->name('deletefaqs');
+Route::post('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'savecompanyfaq'])->name('savecompanyfaq');
 
 Route::get('/admingetrdelete/{id}', [App\Http\Controllers\adminController::class, 'adminuserdelete'])->name('adminuserdelete');
 Route::get('/admingetlock/{id}', [App\Http\Controllers\adminController::class, 'adminunblock'])->name('adminunblock');
