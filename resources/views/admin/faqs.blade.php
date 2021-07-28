@@ -66,40 +66,45 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                            @if ($faqs)
+                                @foreach ($faqs as $faq )
+                                <tr class="tr-shadow">
+                                    <form action="" method="post">
+                                        <td>
+                                            <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td><textarea name="" id="" cols="30" rows="5">
-                                    OUR-AGENDA-IS-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                </textarea></td>
-
-
-                                <td class="desc"><textarea name="" id="" cols="30" rows="5">
-                                    OUR-AGENDA-IS-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                                </textarea>
-                                </td>
-
-                                <td>
-                                    <div class="table-data-feature">
-
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Add">
-                                            <i class="zmdi zmdi-plus"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
+                                                <span class="">1</span>
+                                            </label>
+                                            <input type="text" name="id" value="{{$faq->id}}">
+                                        </td>
+                                        <td><textarea name="question" value=""  id="" cols="30" rows="5">
+                                            {{$faq->question}}
+                                        </textarea></td>
 
 
+                                        <td class="desc"><textarea name="answer" values="" id="" cols="30" rows="5">
+                                            {{$faq->answer}}                                    </textarea>
+                                        </td>
 
+                                        <td>
+                                            <div class="table-data-feature">
+
+                                                <button class="item" type="submit" data-toggle="tooltip" data-placement="top" title="save changes">
+                                                    <i class="zmdi zmdi-border-color"></i>
+                                                </button>
+                                                <a href="{{route("deletefaqs",$faq->id)}}">
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <tr class="spacer"></tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
