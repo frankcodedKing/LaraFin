@@ -125,6 +125,36 @@ class adminController extends Controller
 
     }
 
+
+
+    public function emailmgt()
+    {
+
+        return view("admin.emailmgt");
+
+    }
+
+    public function sendemail()
+    {
+
+        return view("admin.sendemail");
+
+    }
+
+    public function topearners()
+    {
+
+        return view("admin.topearners");
+
+    }
+
+    public function news()
+    {
+
+        return view("admin.news");
+
+    }
+
     public function pendingdeposits()
     {
         $pendingDeposit = Deposit::where("status", 0)->paginate(20);

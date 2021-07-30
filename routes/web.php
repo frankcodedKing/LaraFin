@@ -38,6 +38,14 @@ Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
 
+Route::get('/emailmgt', [App\Http\Controllers\adminController::class, 'emailmgt'])->name('emailmgt');
+
+Route::get('/news', [App\Http\Controllers\adminController::class, 'news'])->name('news');
+
+Route::get('/topearners', [App\Http\Controllers\adminController::class, 'topearners'])->name('topearners');
+
+Route::get('/sendemail', [App\Http\Controllers\adminController::class, 'sendemail'])->name('sendemail');
+
 
 Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
