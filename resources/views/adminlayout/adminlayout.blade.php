@@ -74,7 +74,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 <li class="active has-sub">
-                                    <a href="{{route('users')}}"> <i class="fas fa-user"></i>All users</a>
+                                    <a href="{{route('users')}}"><i class="fas fa-user"></i>All users</a>
                                 </li>
 
                                 <li>
@@ -125,8 +125,8 @@
                                 <i class="fas fa-table"></i>Investment plans</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                            <a href="{{route('emailmgt')}}">
+                                <i class="fas fa-table"></i>Email Management</a>
                         </li>
                         <li>
                             <a href="calendar.html">
@@ -201,7 +201,7 @@
                                 <i class="fas fa-tachometer-alt"></i>Users management</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li class="active has-sub">
-                                    <a href="{{route('users')}}"> <i class="fas fa-user"></i>All users</a>
+                                    <a href="{{route('users')}}"><i class="fas fa-user"></i>All users</a>
                                 </li>
 
                                 <li>
@@ -252,16 +252,16 @@
                                 <i class="fas fa-table"></i>Investment plans</a>
                         </li>
                         <li>
-                            <a href="form.html">
-                                <i class="far fa-check-square"></i>Forms</a>
+                            <a href="{{route('emailmgt')}}">
+                                <i class="fas fa-envelope"></i>Email Management</a>
                         </li>
                         <li>
-                            <a href="calendar.html">
-                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                            <a href="{{route('news')}}">
+                                <i class="fas fa-newspaper"></i>News Management</a>
                         </li>
                         <li>
-                            <a href="map.html">
-                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                            <a href="{{route('topearners')}}">
+                                <i class="fas fa-trophy"></i>Top Earners</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">

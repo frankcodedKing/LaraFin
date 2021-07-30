@@ -38,8 +38,21 @@ Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
 
+<<<<<<< HEAD
+Route::get('/emailmgt', [App\Http\Controllers\adminController::class, 'emailmgt'])->name('emailmgt');
+
+Route::get('/news', [App\Http\Controllers\adminController::class, 'news'])->name('news');
+
+Route::get('/topearners', [App\Http\Controllers\adminController::class, 'topearners'])->name('topearners');
+
+Route::get('/sendemail', [App\Http\Controllers\adminController::class, 'sendemail'])->name('sendemail');
+
+
+Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
+=======
 //referals
 Route::get('/viewuserreferrals{id}', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
+>>>>>>> 26c68104c0f6b628a6a509384c9a7ec831c8bb4f
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
 Route::get('/payreferral', [App\Http\Controllers\adminController::class, 'payreferral'])->name('payreferral');
 
