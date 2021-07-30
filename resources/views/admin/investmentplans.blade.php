@@ -70,6 +70,7 @@
                 <th>No of repeat</th>
                 <th></th>
             </tr>
+            
         </thead>
         <tbody>
             @if ($allplans)

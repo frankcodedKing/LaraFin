@@ -24,15 +24,17 @@ tinymce.init({
                         <div class="card-header">Email</div>
                         <div class="card-body">
 
-                            <form action="#" method="post" novalidate="novalidate">
+                            <form action="{{route('sendmail')}}" method="post" novalidate="novalidate">
+                                @csrf
+                                <input type="text" name="id" value="{{ isset($id)? $id : ''}}" id="">
 
                                 <div class="form-group">
                                     <label for="cc-payment" class="control-label mb-1">Title</label>
-                                    <input id="about" name="about_title" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
+                                    <input id="about" name="mailtitle" type="text" class="form-control" aria-required="true" aria-invalid="false" value="">
                                 </div>
                                 <div class="form-group has-success">
                                     <label for="cc-name" class="control-label mb-1">Content</label>
-                                    <textarea id="default" name="about_text"  cols="15" value="" rows="13">
+                                    <textarea id="default" name="mail"  cols="15" value="" rows="13">
 
                                     </textarea>
 

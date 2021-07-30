@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\Adminmail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('testemail', function () {
+    return new Adminmail ;
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,24 +40,28 @@ Route::get('/approveddeposits', [App\Http\Controllers\adminController::class, 'a
 Route::get('/pendingdeposits', [App\Http\Controllers\adminController::class, 'pendingdeposits'])->name('pendingdeposits');
 Route::get('/runninginvestments', [App\Http\Controllers\adminController::class, 'runninginvestments'])->name('runninginvestments');
 
+// email and top earners routes
+
 Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'viewuser'])->name('viewuser');
 
-
-<<<<<<< HEAD
 Route::get('/emailmgt', [App\Http\Controllers\adminController::class, 'emailmgt'])->name('emailmgt');
 
 Route::get('/news', [App\Http\Controllers\adminController::class, 'news'])->name('news');
 
 Route::get('/topearners', [App\Http\Controllers\adminController::class, 'topearners'])->name('topearners');
+Route::get('/sendemail', [App\Http\Controllers\adminController::class, 'sendbulkemail'])->name('sendbulkemail');
 
-Route::get('/sendemail', [App\Http\Controllers\adminController::class, 'sendemail'])->name('sendemail');
+
+Route::get('/sendemail/{id}', [App\Http\Controllers\adminController::class, 'sendemail'])->name('sendemail');
 
 
-Route::get('/viewuserreferrals', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
-=======
+Route::post('/sendmail', [App\Http\Controllers\adminController::class, 'sendmail'])->name('sendmail');
+
+
+
 //referals
 Route::get('/viewuserreferrals{id}', [App\Http\Controllers\adminController::class, 'viewuserreferrals'])->name('viewuserreferrals');
->>>>>>> 26c68104c0f6b628a6a509384c9a7ec831c8bb4f
+
 Route::get('/referrals', [App\Http\Controllers\adminController::class, 'referrals'])->name('referrals');
 Route::get('/payreferral', [App\Http\Controllers\adminController::class, 'payreferral'])->name('payreferral');
 
