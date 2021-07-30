@@ -61,33 +61,35 @@
 
                                 </th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Deposit</th>
 
-                                <th></th>
+                                <th> Total Deposit</th>
+
+                                <th>STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+@if ($userrefs)
+    @foreach ($userrefs as $user)
+    <tr class="tr-shadow">
+        <td>
+            <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="desc">lori@example.com</span>
-                                </td>
+                <span class="">{{$loop->index + 1}}</span>
+            </label>
+        </td>
+        <td>{{$user["refdeatil"]->name}}</td>
 
-                                <td>01234567890</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"> Pay</button>
-                                </td>
-                                <td><button type="button" class="btn btn-primary"> Delete</button></td>
+        <td>{{$user["refdeatil"]->totaldeposit}}</td>
+        <td>
+            <a href="{{route('payreferral',$user['refid'])}}"><button type="button" class="btn btn-primary"> Pay</button></a>
+        </td>
+        <td><a href="{{route('delreferral',$user['refid'])}"><button type="button" class="btn btn-primary"> Delete</button>
+        </a></td>
 
-                            </tr>
-                            <tr class="spacer"></tr>
+    </tr>
+    <tr class="spacer"></tr>
+    @endforeach
+@endif
                         </tbody>
                     </table>
                 </div>

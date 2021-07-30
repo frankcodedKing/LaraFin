@@ -62,33 +62,38 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Users-reffered</th>
                                 <th>Action</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($refarray)
+
+                            @foreach ($refarray as $ref)
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">1</span>
+                                        <span class="">{{$loop->index + 1}}</span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
+                                <td>{{$ref->ref->oldusernamename}}/td>
                                 <td>
-                                    <span class="desc">lori@example.com</span>
+                                    <span class="desc">{{$ref->ref->olduseremail}}</span>
                                 </td>
 
-                                <td>01234567890</td>
+
                                 <td>
-                                   <span>6</span>
+                                   <span>{{$ref->refno}}</span>
                                 </td>
-                                <td><a href="{{route('viewuserreferrals')}}"><button type="button" class="btn btn-primary"> view-referrals</button></a></td>
+                                <td><a href="{{route('viewuserreferrals', $ref->ref->userid)}}"><button type="button" class="btn btn-primary"> view-referrals</button></a></td>
 
                             </tr>
                             <tr class="spacer"></tr>
+                            @endforeach
+
+                            @endif
                         </tbody>
                     </table>
                 </div>
