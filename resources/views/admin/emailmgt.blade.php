@@ -49,6 +49,9 @@
                         <strong>USER EMAIL MANAGEMENT</strong>
 
                     </div>
+                    <div class="user-data__footer">
+                        <a href="{{route('sendbulkemail')}}" role="button"> <span class="role member">Send Bulk email</span></a>
+                            </div>
 
 
                     <table class="table">
@@ -69,30 +72,34 @@
                         <tbody>
 
 
-                            <tr>
-                                <td>
-                                    <label>
+                            @if ($allsuer)
+                                @foreach ($allsuer as $user)
+                                <tr>
+                                    <td>
+                                        <label>
 
-                                        <span>1</span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="table-data__info">
-                                        <p>lori lynch</p>
+                                            <span>1</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <div class="table-data__info">
+                                            <p>{{$user->name}}</p>
 
-                                    </div>
-                                </td>
-                                <td>
-                                    <span>
-                                        <a href="">johndoe@gmail.com</a>
-                                    </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>
+                                            {{$user->email}}
+                                        </span>
 
-                                </td>
-                                <td>
-                                    <a href="#sendemail"> <span class="role user">Send email</span></a>
-                                </td>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('sendemail',$user->id)}}"> <span class="role user">Send email</span></a>
+                                    </td>
 
-                            </tr>
+                                </tr>
+                                @endforeach
+                            @endif
 
 
 
@@ -101,7 +108,7 @@
 
                     </table>
                     <div class="user-data__footer">
-                        <a href="#sendemail" role="button"> <span class="role member">Send Bulk email</span></a>
+                        <a href="{{route('sendbulkemail')}}" role="button"> <span class="role member">Send Bulk email</span></a>
                             </div>
                 </div>
             </div>

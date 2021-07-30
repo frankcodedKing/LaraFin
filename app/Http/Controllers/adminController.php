@@ -9,8 +9,8 @@ use App\Models\Withdrawal;
 use App\Models\Investment;
 use App\Models\Investmentplan;
 use App\Models\Referral;
-use App\Models\investmentplans;
 use Illuminate\Http\Fund;
+use Illuminate\Http\Request;
 
 class adminController extends Controller
 {
@@ -133,16 +133,62 @@ class adminController extends Controller
     public function emailmgt()
     {
 
-        return view("admin.emailmgt");
+        $users = User::all();
+        $data = ["allsuer" => $users];
+        return view("admin.emailmgt", $data);
 
     }
 
-    public function sendemail()
+    public function sendemail(Request $req)
     {
+        $id = $req->id;
+        return view("admin.sendemail", ["id"=>$id] );
+    }
+
+    public function sendbulkemail (){
+
+        return view("admin.sendemail");
+    }
+
+
+    public function sendmail(Request $req)
+    {
+        $mailtitle = $req ->mailtitle;
+        $mail = $req -> mail;
+        $userid =  $red-> userid;
+        if (isset($userid)) {
+            # code...
+            $user = User::where("id", $userid)->first();
+            $email = $user->email;
+        $emaildata=['data'=> $email,'email_body'=>$mail,'email_header'=>$mailtitle];
+
+        Mail::to($email)->send(new customemail($emaildata));
+
+        return redirect()->route("emailmgt")->with("success", "Email sent to $email succesfuly");
+
+        } else {
+            # code...
+            $users = User::all();
+
+        $emaildata=['data'=> $email,'email_body'=>$mail,'email_header'=>$mailtitle];
+
+       foreach ($users as $user) {
+           # code...
+           $email = $user->email;
+           Mail::to($email)->send(new customemail($emaildata));
+
+       }
+
+        return redirect()->route("emailmgt")->with("success", "Email sent to all users succesfuly");
+        }
+
+
 
         return view("admin.sendemail");
 
     }
+
+
 
     public function topearners()
     {
@@ -687,7 +733,7 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
 
     public function deleteinvestmentplan (Request $req) {
         $id = $req->id;
-        $result = deleteRow(Referral::class, $id);
+        $result = deleteRow(Investmentplan::class, $id);
         if ($result) {
             # code...
             return redirect()->route("investmentplans", $id)->with("success", "Referral deleted succesfuly");
