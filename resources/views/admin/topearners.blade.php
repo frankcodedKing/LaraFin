@@ -64,6 +64,7 @@
 
                                 <th>Name</th>
                                 <th>Amount Earned</th>
+                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -76,6 +77,10 @@
                                                     <th>1</th>
                                                     <td>Austia</td>
                                                     <td>$70,261.65</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-danger" disabled>Remove</button>
+
+                                                    </td>
                                                 </tr>
 
 

@@ -102,7 +102,7 @@ tinymce.init({
                     </form>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
                             <strong>ADD NEW FAQS</strong>
@@ -133,64 +133,17 @@ tinymce.init({
 
 
                         </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Create
-                            </button>
+                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                            <i class="fa fa-pen fa-lg"></i>&nbsp;
+                            <span id="payment-button-amount"> Create</span>
+                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                        </button>
 
-                        </div>
                     </form>
                     </div>
 
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <strong>FAQ 1</strong>
-                        </div>
-                        <div class="card-body card-block">
-                            <form action="" method="post"  class="form-horizontal">
-                                {{-- <div class="row form-group">
-                                    <div class="col col-md-3">
-                                        <label class=" form-control-label">Static</label>
-                                    </div>
-                                    <div class="col-12 col-md-9">
-                                        <p class="form-control-static">Username</p>
-                                    </div>
-                                </div> --}}
-
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <h5>Question</h5>
-                                        <textarea name="question" id="" cols="20" rows="10">
-
-                                        </textarea>
-                                    </div>
-
-                                    <div class="col-xs-12">
-                                        <h5>Answer</h5>
-                                        <textarea name="answer" id="" cols="20" rows="10">
-
-                                        </textarea>
-                                    </div>
-
-                                </div>
-
-                            </form>
-                        </div>
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <i class="fa fa-dot-circle-o"></i> Edit
-                            </button>
-                            <button type="submit" class="btn btn-danger btn-sm">
-                                <i class="fa fa-ban"></i> Delete
-                            </button>
-                        </div>
-                    </div>
-
-
-                </div>
+{{-- --}}
 
         </div>
     </div>

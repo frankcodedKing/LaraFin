@@ -78,6 +78,7 @@ Route::get('/savecompanydetails', [App\Http\Controllers\adminController::class, 
 Route::get('/savecompanyabout', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyabout');
 Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pages'])->name('savecompanyfaq');
 
+Route::get('/savenews', [App\Http\Controllers\adminController::class, 'pages'])->name('savenews');
 
 
 
@@ -85,8 +86,8 @@ Route::get('/savecompanyfaq', [App\Http\Controllers\adminController::class, 'pag
 Route::post('/savecompanydetails', [App\Http\Controllers\adminController::class, 'savecompanydetails'])->name('savecompanydetails');
 Route::post('/savecompanyabout', [App\Http\Controllers\adminController::class, 'savecompanyabout'])->name('savecompanyabout');
 
-
 //faqs delete and edit
+// Route::get('/viewnews', [App\Http\Controllers\adminController::class, 'viewnews'])->name('viewnews');
 Route::get('/viewfaqs', [App\Http\Controllers\adminController::class, 'viewfaqs'])->name('viewfaqs');
 Route::post('/editfaqs', [App\Http\Controllers\adminController::class, 'editfaqs'])->name('editfaqs');
 Route::get('/deletefaqs{id}', [App\Http\Controllers\adminController::class, 'deletefaqs'])->name('deletefaqs');
@@ -115,4 +116,8 @@ Route::post('/editinvestmentplan/{id}', [App\Http\Controllers\adminController::c
 Route::post('/createinvestmentplan', [App\Http\Controllers\adminController::class, 'createinvestmentplan'])->name('createinvestmentplan');
 
 
+// newssection
+Route::post('/savenews', [App\Http\Controllers\adminController::class, 'savenews'])->name('savenews');
 
+// Route::post('/deletenews/{id}', [App\Http\Controllers\adminController::class, 'deletenews'])->name('deletenews');
+Route::post('/editnews/{id}', [App\Http\Controllers\adminController::class, 'editnews'])->name('editnews');

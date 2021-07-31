@@ -11,6 +11,7 @@ use App\Models\Investmentplan;
 use App\Models\Referral;
 use Illuminate\Http\Fund;
 use Illuminate\Http\Request;
+use App\Models\Newspost;
 
 class adminController extends Controller
 {
@@ -257,6 +258,45 @@ class adminController extends Controller
         $data = ["faqs" => $allFaqs];
         return view("admin.faqs", $data);
     }
+
+
+     /**save news */
+
+
+     public function savenews(Request $req)
+     {
+        $newstitle= $req->newstitle;
+        $newscontent= $req->newscontent;
+
+        $saveNewsArray=[
+            "newstitle"=>$newstitle,
+            "newscontent"=>$newscontent
+        ];
+       $result= $this->savedata(NewsPost::class,"new",$saveNewsArray);
+       if($result)
+       {
+           return redirect()->route("news")->with("success","Newsposted-successfully");
+
+       }else {
+           # code...
+           return redirect()->route("news")->with("success","Newsposting Not succesful try again");
+       }
+     }
+
+     public function editnews(Request $req)
+     {
+        $newstitle= $req->newstitle;
+        $newscontent= $req->newscontent;
+        $saveNewsArray=[
+            "newstitle"=>$newstitle,
+            "newscontent"=>$newscontent
+        ];
+
+     }
+
+
+
+
 
  /**save faqs */
  public function savecompanyfaq (Request $req){
