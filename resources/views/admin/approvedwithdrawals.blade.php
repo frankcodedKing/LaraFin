@@ -62,48 +62,47 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Deposit</th>
-                                <th>Balance</th>
+                                <th>amount</th>
+                                <th>account</th>
+                                <th>account method</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @if ($approvedwithdrawals)
+
+                            @foreach ($approvedwithdrawals as $approvedwithdrawal )
                             <tr class="tr-shadow">
                                 <td>
                                     <label class="">
 
-                                        <span class="">1</span>
+                                        <span class="">{{$loop->index + 1}}</span>
                                     </label>
                                 </td>
-                                <td>Lori Lynch</td>
+                                <td>{{$approvedwithdrawal->name}}</td>
                                 <td>
-                                    <span class="desc">lori@example.com</span>
+                                    <span class="desc">{{$approvedwithdrawal->email}}</span>
                                 </td>
 
-                                <td>01234567890</td>
+                                <td>{{$approvedwithdrawal->amount}}</td>
                                 <td>
-                                   <span class="desc">$67476</span>
+                                   <span class="desc">{{$approvedwithdrawal->method}}</span>
                                 </td>
-                                <td>$679.00</td>
+                                <td>{{$approvedwithdrawal->methodaccount}}</td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                            <i class="zmdi zmdi-account"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                        <a href="{{route('deletewithdrawal',$pendingwithdrawal->id )}}">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                             <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
+                                        </button></a>
                                     </div>
                                 </td>
                             </tr>
                             <tr class="spacer"></tr>
+                            @endforeach
+
+                            @endif
+
                         </tbody>
                     </table>
                 </div>

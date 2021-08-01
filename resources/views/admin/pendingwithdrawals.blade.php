@@ -62,48 +62,50 @@
                                 </th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
-                                <th>Deposit</th>
-                                <th>Balance</th>
-                                <th></th>
+                                <th>amount</th>
+                                <th>method</th>
+                                <th>method account</th>
+                                <th>pay</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tr-shadow">
-                                <td>
-                                    <label class="">
+                            @if ($pendingwithdrawals)
+                                @foreach ($pendingwithdrawals as $pendingwithdrawal )
+                                <tr class="tr-shadow">
+                                    <td>
+                                        <label class="">
 
-                                        <span class="">1</span>
-                                    </label>
-                                </td>
-                                <td>Lori Lynch</td>
-                                <td>
-                                    <span class="desc">lori@example.com</span>
-                                </td>
+                                            <span class="">{{$loop->index + 1}}</span>
+                                        </label>
+                                    </td>
+                                    <td>{{$pendingwithdrawal->name}}</td>
+                                    <td>
+                                        <span class="desc">{{$pendingwithdrawal->email}}}</span>
+                                    </td>
 
-                                <td>01234567890</td>
-                                <td>
-                                    <span class="desc">$67476</span>
-                                </td>
-                                <td>$679.00</td>
-                                <td>
-                                    <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="view">
-                                            <i class="zmdi zmdi-account"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="spacer"></tr>
+                                    <td>{{$pendingwithdrawal->method}}</td>
+                                    <td>
+                                        <span class="desc">{{$pendingwithdrawal->methodaccount}}</span>
+                                    </td>
+
+                                    <td>
+                                        <div class="table-data-feature">
+
+                                            <a href="{{route('markwithdrawalpaid', $pendingwithdrawal->id )}}"><button class="item" data-toggle="tooltip" data-placement="top" title="mark as paid">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button></a>
+                                            <a href="{{route('deletewithdrawal',$pendingwithdrawal->id )}}">
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button></a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="spacer"></tr>
+
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

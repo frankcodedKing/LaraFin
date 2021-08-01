@@ -63,7 +63,7 @@
                                 </th>
 
                                 <th>Name</th>
-                                <th>Amount Earned</th>
+                                <th>Email</th>
                                 <th>Action</th>
 
                             </tr>
@@ -71,19 +71,21 @@
                         <tbody>
                             <div class="col-lg-12">
                                 <!-- TOP user-->
-
-
-                                                <tr>
-                                                    <th>1</th>
-                                                    <td>Austia</td>
-                                                    <td>$70,261.65</td>
+                                               @if($topearners)
+                                                   @foreach ( $topearners as $topearner )
+                                                   <tr>
+                                                    <th>{{$loop->index + 1}}</th>
+                                                    <td>{{$topearner->name}}</td>
+                                                    <td>{{$topearner->email}}</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-danger" disabled>Remove</button>
+                                                    <a href="{{route('deltopearners', $topearner->id)}}">
 
+                                                        <button type="button" class="btn btn-danger">Remove</button>
+                                                    </a>
                                                     </td>
                                                 </tr>
-
-
+                                                   @endforeach
+                                               @endif
                                     </div>
                                 </div>
                                 <!--  END TOP users-->

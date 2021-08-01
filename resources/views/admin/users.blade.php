@@ -104,6 +104,9 @@
                                             <a href='{{route("adminunblock",$user->id )}}'><i class='zmdi zmdi-shield-check'></i></a>
                                         </button>
                                     @endif
+                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Add user to top earners">
+                                        <a href="{{route('addtopearners',$user->id )}}"><i class="zmdi zmdi-plus"></i></a>
+                                    </button>
 
                                     </div>
                                 </td>

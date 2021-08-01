@@ -9,6 +9,7 @@ use App\Models\Withdrawal;
 use App\Models\Investment;
 use App\Models\Investmentplan;
 use App\Models\Referral;
+use App\Models\Topearner;
 use Illuminate\Http\Fund;
 use Illuminate\Http\Request;
 use App\Models\Newspost;
@@ -95,7 +96,8 @@ class adminController extends Controller
         $row = $model::where("id", $rowid)->first();
         if ($row == null) {
             return"row to delete not found";
-        } else {
+        }
+         else {
             if ($row->delete) {
                 return true;
             } else {
@@ -189,22 +191,6 @@ class adminController extends Controller
 
     }
 
-
-
-    public function topearners()
-    {
-
-        return view("admin.topearners");
-
-    }
-
-    public function news()
-    {
-
-        return view("admin.news");
-
-    }
-
     public function pendingdeposits()
     {
         $pendingDeposit = Deposit::where("status", 0)->paginate(20);
@@ -216,20 +202,41 @@ class adminController extends Controller
     {
         $approvedDeposit = Deposit::where("status", 1)->paginate(20);
         $data = ["approvedDeposit" => $approvedDeposit];
-
         return view("admin.approveddeposits", $data);
     }
 
 
     public function pendingwithdrawals()
     {
-        return view("admin.pendingwithdrawals");
+        $pednindWithdrawal = Withdrawal::where("status",0)->join('users', 'users.id', '=', 'withdrawals.userid')->get();
+        $data=["pendingwithdrawals"=>$pednindWithdrawal];
+        return view("admin.pendingwithdrawals", $data);
     }
 
     public function approvedwithdrawals()
     {
-        return view("admin.approvedwithdrawals");
+        $approveddWithdrawal = Withdrawal::where("status", 1)->join('users', 'users.id', '=', 'withdrawals.userid')->get();
+        $data=["approvedwithdrawals"=>$approveddWithdrawal];
+        return view("admin.approvedwithdrawals", $data);
     }
+
+    public function markwithdrawalpaid (Request $req){
+        $id =$req->id;
+
+
+        $saveArray = [
+            "status"=>1,
+        ];
+        $result = $this->savedata(Withdrawal::class, "new" , $saveArray);
+        if ($result) {
+            # code...
+            return redirect()->route("pendingwithdrawals", $id)->with("success", "deposit added succesful");
+        } else {
+            # code...
+            return redirect()->route("pendingwithdrawals", $id)->with("error", "failed to add deposit");
+
+    }
+}
 
 
     public function runninginvestments()
@@ -258,43 +265,6 @@ class adminController extends Controller
         $data = ["faqs" => $allFaqs];
         return view("admin.faqs", $data);
     }
-
-
-     /**save news */
-
-
-     public function savenews(Request $req)
-     {
-        $newstitle= $req->newstitle;
-        $newscontent= $req->newscontent;
-
-        $saveNewsArray=[
-            "newstitle"=>$newstitle,
-            "newscontent"=>$newscontent
-        ];
-       $result= $this->savedata(NewsPost::class,"new",$saveNewsArray);
-       if($result)
-       {
-           return redirect()->route("news")->with("success","Newsposted-successfully");
-
-       }else {
-           # code...
-           return redirect()->route("news")->with("success","Newsposting Not succesful try again");
-       }
-     }
-
-     public function editnews(Request $req)
-     {
-        $newstitle= $req->newstitle;
-        $newscontent= $req->newscontent;
-        $saveNewsArray=[
-            "newstitle"=>$newstitle,
-            "newscontent"=>$newscontent
-        ];
-
-     }
-
-
 
 
 
@@ -773,7 +743,7 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
 
     public function deleteinvestmentplan (Request $req) {
         $id = $req->id;
-        $result = deleteRow(Investmentplan::class, $id);
+        $result =$this->deleteRow(Investmentplan::class, $id);
         if ($result) {
             # code...
             return redirect()->route("investmentplans", $id)->with("success", "Referral deleted succesfuly");
@@ -781,6 +751,121 @@ $result = $this->savedata(Companydetail::class, null , $saveArray);
             # code...
             return redirect()->route("investmentplans", $id)->with("error", "failed to delete Referral");
         }
+
+    }
+
+
+
+
+
+
+       /**save news */
+
+    public function news()
+    {
+        $news = Newspost::all();
+        $data = ["newsposts"=>$news];
+
+        return view("admin.news", $data);
+
+    }
+
+
+    public function savenews(Request $req)
+    {
+       $newstitle= $req->newstitle;
+       $newscontent= $req->newscontent;
+
+       $saveNewsArray=[
+           "newstitle"=>$newstitle,
+           "newscontent"=>$newscontent
+       ];
+      $result= $this->savedata(Newspost::class,"new",$saveNewsArray);
+      if($result)
+      {
+          return redirect()->route("news")->with("success","Newsposted-successfully");
+
+      }else {
+          # code...
+          return redirect()->route("news")->with("success","Newsposting Not succesful try again");
+      }
+    }
+
+    public function editnews(Request $req)
+    {
+       $newstitle= $req->newstitle;
+       $newscontent= $req->newscontent;
+       $id = $req->id;
+       $saveNewsArray=[
+           "newstitle"=>$newstitle,
+           "newscontent"=>$newscontent
+       ];
+       $result= $this->savedata(Newspost::class, $id ,$saveNewsArray);
+      if($result)
+      {
+          return redirect()->route("news")->with("success","News edited-successfully");
+
+      }else {
+          # code...
+          return redirect()->route("news")->with("success","News editing Not succesful try again");
+      }
+
+    }
+
+
+    public function deletenews (Request $req){
+        $id = $req->id;
+
+        $result = $this->deleteRow(Newspost::class, $id);
+        if ($result) {
+            # code...
+            return redirect()->route("news", $id)->with("success", "news deleted succesfuly");
+        }
+         else {
+            # code...
+            return redirect()->route("news", $id)->with("error", "failed to delete news");
+        }
+    }
+
+
+
+    public function topearners()
+    {
+
+        $topEarners =Topearner::join('users', 'users.id', '=', 'Topearners.userid')->get();
+        $data =["topearners"=>$topEarners];
+        return view("admin.topearners", $data);
+
+    }
+
+    public function deltopearners(Request $req){
+        $userid = $req->id;
+        $result = $this->deleteRow(Topearner::class, $userid);
+        if ($result) {
+            # code...
+            return redirect()->route("pages")->with("warning", "top user deleted successfuly");
+        } else {
+            # code...
+            return redirect()->route("pages")->with("error", "Failed to delete top user");
+        }
+    }
+
+
+    public function addtopearners (Request $req) {
+        $id = $req->id;
+        $saveNewsArray=[
+            "userid"=>$id,
+        ];
+        $result= $this->savedata(Topearner::class, "new" ,$saveNewsArray);
+       if($result)
+       {
+           return redirect()->route("users")->with("success","New top earner addedsuccessfully");
+
+       }
+       else {
+           # code...
+           return redirect()->route("users")->with("success","adding Not succesful try again");
+       }
 
     }
 

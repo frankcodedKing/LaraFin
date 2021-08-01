@@ -46,9 +46,7 @@ Route::get('/viewuser/{id}', [App\Http\Controllers\adminController::class, 'view
 
 Route::get('/emailmgt', [App\Http\Controllers\adminController::class, 'emailmgt'])->name('emailmgt');
 
-Route::get('/news', [App\Http\Controllers\adminController::class, 'news'])->name('news');
 
-Route::get('/topearners', [App\Http\Controllers\adminController::class, 'topearners'])->name('topearners');
 Route::get('/sendemail', [App\Http\Controllers\adminController::class, 'sendbulkemail'])->name('sendbulkemail');
 
 
@@ -107,6 +105,9 @@ Route::post('/adddeposit', [App\Http\Controllers\adminController::class, 'adddep
 Route::post('/editwithdrawal', [App\Http\Controllers\adminController::class, 'editwithdrawal'])->name('editwithdrawal');
 Route::post('/deletewithdrawal/{id}', [App\Http\Controllers\adminController::class, 'deletewithdrawal'])->name('deletewithdrawal');
 Route::post('/addwithdrawal', [App\Http\Controllers\adminController::class, 'addwithdrawal'])->name('addwithdrawal');
+Route::post('/markwithdrawalpaid', [App\Http\Controllers\adminController::class, 'markwithdrawalpaid'])->name('markwithdrawalpaid');
+
+
 
 Route::post('/editinvestment', [App\Http\Controllers\adminController::class, 'editinvestment'])->name('editinvestment');
 Route::post('/deleteinvestment/{id}', [App\Http\Controllers\adminController::class, 'deleteinvestment'])->name('deleteinvestment');
@@ -118,6 +119,14 @@ Route::post('/createinvestmentplan', [App\Http\Controllers\adminController::clas
 
 // newssection
 Route::post('/savenews', [App\Http\Controllers\adminController::class, 'savenews'])->name('savenews');
+Route::get('/news', [App\Http\Controllers\adminController::class, 'news'])->name('news');
 
-// Route::post('/deletenews/{id}', [App\Http\Controllers\adminController::class, 'deletenews'])->name('deletenews');
-Route::post('/editnews/{id}', [App\Http\Controllers\adminController::class, 'editnews'])->name('editnews');
+Route::post('/editnews', [App\Http\Controllers\adminController::class, 'editnews'])->name('editnews');
+Route::get('/deletenews/{id}', [App\Http\Controllers\adminController::class, 'deletenews'])->name('deletenews');
+
+
+//top earners
+Route::get('/topearners', [App\Http\Controllers\adminController::class, 'topearners'])->name('topearners');
+Route::get('/deltopearners{id}', [App\Http\Controllers\adminController::class, 'deltopearners'])->name('deltopearners');
+Route::get('/addtopearners{id}', [App\Http\Controllers\adminController::class, 'addtopearners'])->name('addtopearners');
+
